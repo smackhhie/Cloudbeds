@@ -140,7 +140,7 @@ class checkinListener implements ActionListener {
 
             // Create a SQL query to retrieve available room numbers of the selected type
             String query = "SELECT roomNo FROM rooms WHERE room_type = '" + roomType
-                    + "' AND room_status = 'available'";
+                    + "' AND room_status = 'clean' AND  room_availability = 'available'";
 
             // Execute the query
             Statement stmt = conn.createStatement();
