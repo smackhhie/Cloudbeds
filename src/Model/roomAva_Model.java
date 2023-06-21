@@ -8,6 +8,6 @@ package Model;
  *
  * @author Anup
  */
-public class checkin_View {
+public class roomAva_Model {
     
 }
