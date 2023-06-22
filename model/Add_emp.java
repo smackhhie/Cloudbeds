@@ -1,5 +1,6 @@
-package view;
+package model;
 
+import view.*;
 import database.FRONT;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
@@ -19,9 +20,9 @@ public class Add_emp extends javax.swing.JFrame {
        model = new Add_empmodel(txtname.getText(),(String) txtselect.getSelectedItem(),salary.getText(),phone.getText(),citizenno.getText());
        return model;
    }
-   public Add_empListenter(ActionListener dashboard){
-       btnsummit.addActionListener(dashboard);
-   }
+//   public Add_empListenter(ActionListener dashboard){
+//       btnsummit.addActionListener(dashboard);
+//   }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -458,6 +459,9 @@ public class Add_emp extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Add_emp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
