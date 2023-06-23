@@ -13,7 +13,7 @@ public class checkin_Controller {
     private Connection conn;
     PreparedStatement pst;
     checkin_Model model;
-    Check_in_out view;
+    Check_in_out view;  
     private int updatedCustomerId = 100;
 
     public checkin_Controller(Check_in_out view) {
@@ -86,7 +86,7 @@ class checkinListener implements ActionListener {
     public void updateRoomStatus(int roomNumber) {
     try {
         conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cloudbeds", "root", "15anup#$");
-        String sql = "UPDATE rooms SET room_status = 'occupied' WHERE roomNo = ?";
+        String sql = "UPDATE rooms SET room_availability = 'occupied' WHERE roomNo = ?";
         pst = conn.prepareStatement(sql);
         pst.setInt(1, roomNumber);
         pst.executeUpdate();
@@ -138,15 +138,12 @@ class checkinListener implements ActionListener {
             Class.forName("com.mysql.cj.jdbc.Driver");
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cloudbeds", "root", "15anup#$");
 
-            // Create a SQL query to retrieve available room numbers of the selected type
+            // to retrieve available room numbers of the selected type
             String query = "SELECT roomNo FROM rooms WHERE room_type = '" + roomType
                     + "' AND room_status = 'clean' AND  room_availability = 'available'";
 
-            // Execute the query
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
-
-            // Clear existing items in the combo box
             combo_rNumber.removeAllItems();
 
             // Populate the combo box with retrieved room numbers

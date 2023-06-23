@@ -95,7 +95,7 @@ public class checkin_Model {
         this.amountRemaining = amountRemaining;
     }
     public checkin_Model(String fullName, String phoneNumber, int amountPaid, int duration, String gender, String roomType, int roomNumber, Date checkinDate, int customerId, int amountRemaining) {
-    // Initialize the member variables of the checkin_Model class
+ 
     this.fullname = fullName;
     this.phNumber = phoneNumber;
     this.amountPaid = amountPaid;
