@@ -4,8 +4,6 @@
  */
 package model;
 
-import view.update_emp_info;
-
 /**
  *
  * @author rujan
@@ -241,7 +239,7 @@ public class dashboard extends javax.swing.JFrame {
     private void btnaddemployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaddemployeeActionPerformed
             new dashboard().setVisible(false);
             dispose();
-            new update_emp_info().setVisible(true);   
+            new Add_emp().setVisible(true);   
     }//GEN-LAST:event_btnaddemployeeActionPerformed
 
     private void btnexitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnexitActionPerformed
