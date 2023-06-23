@@ -2,8 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package swingexample;
+package model;
 
+import database.FRONT;
+import javax.swing.JOptionPane;
+import java.sql.Connection;
+import java.sql.Statement;
 /**
  *
  * @author Craze
@@ -26,6 +30,7 @@ public class Cus_info extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        grpbtn = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         Header = new javax.swing.JLabel();
         Cus_name = new javax.swing.JLabel();
@@ -34,19 +39,18 @@ public class Cus_info extends javax.swing.JFrame {
         nagarikta = new javax.swing.JLabel();
         Phone_num = new javax.swing.JLabel();
         txt_CusName = new javax.swing.JTextField();
-        txt_nagarikta = new javax.swing.JTextField();
-        txt_Phone_num = new javax.swing.JTextField();
-        male = new javax.swing.JCheckBox();
-        female = new javax.swing.JCheckBox();
-        Other = new javax.swing.JCheckBox();
+        txtcitizen = new javax.swing.JTextField();
+        phone = new javax.swing.JTextField();
+        btnmale = new javax.swing.JCheckBox();
+        btnfemale = new javax.swing.JCheckBox();
+        btnOther = new javax.swing.JCheckBox();
         submit = new javax.swing.JButton();
         back = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Customer Form");
         setBackground(new java.awt.Color(255, 255, 255));
         setIconImages(null);
-        setPreferredSize(new java.awt.Dimension(900, 600));
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -55,7 +59,7 @@ public class Cus_info extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Header.setBackground(new java.awt.Color(255, 255, 255));
-        Header.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cloudbeds-2-removebg-previewww.png"))); // NOI18N
+        Header.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cb.png"))); // NOI18N
         jPanel1.add(Header, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 10, 372, 75));
 
         Cus_name.setBackground(new java.awt.Color(255, 255, 255));
@@ -89,22 +93,25 @@ public class Cus_info extends javax.swing.JFrame {
             }
         });
         jPanel1.add(txt_CusName, new org.netbeans.lib.awtextra.AbsoluteConstraints(378, 188, 199, -1));
-        jPanel1.add(txt_nagarikta, new org.netbeans.lib.awtextra.AbsoluteConstraints(378, 323, 199, -1));
-        jPanel1.add(txt_Phone_num, new org.netbeans.lib.awtextra.AbsoluteConstraints(378, 390, 208, -1));
+        jPanel1.add(txtcitizen, new org.netbeans.lib.awtextra.AbsoluteConstraints(378, 323, 199, -1));
+        jPanel1.add(phone, new org.netbeans.lib.awtextra.AbsoluteConstraints(378, 390, 208, -1));
 
-        male.setText("Male");
-        jPanel1.add(male, new org.netbeans.lib.awtextra.AbsoluteConstraints(378, 258, -1, -1));
+        grpbtn.add(btnmale);
+        btnmale.setText("Male");
+        jPanel1.add(btnmale, new org.netbeans.lib.awtextra.AbsoluteConstraints(378, 258, -1, -1));
 
-        female.setText("Female");
-        female.addActionListener(new java.awt.event.ActionListener() {
+        grpbtn.add(btnfemale);
+        btnfemale.setText("Female");
+        btnfemale.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                femaleActionPerformed(evt);
+                btnfemaleActionPerformed(evt);
             }
         });
-        jPanel1.add(female, new org.netbeans.lib.awtextra.AbsoluteConstraints(445, 258, -1, -1));
+        jPanel1.add(btnfemale, new org.netbeans.lib.awtextra.AbsoluteConstraints(445, 258, -1, -1));
 
-        Other.setText("Other");
-        jPanel1.add(Other, new org.netbeans.lib.awtextra.AbsoluteConstraints(524, 258, -1, -1));
+        grpbtn.add(btnOther);
+        btnOther.setText("Other");
+        jPanel1.add(btnOther, new org.netbeans.lib.awtextra.AbsoluteConstraints(524, 258, -1, -1));
 
         submit.setBackground(new java.awt.Color(102, 102, 255));
         submit.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -147,18 +154,98 @@ public class Cus_info extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_CusNameActionPerformed
 
-    private void femaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_femaleActionPerformed
+    private void btnfemaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnfemaleActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_femaleActionPerformed
+    }//GEN-LAST:event_btnfemaleActionPerformed
+ boolean validation()
+        {
+            
+            String fname=txt_CusName.getText();
+            String Citizen=txtcitizen.getText();
+            String Phone;
+            
+            Phone=phone.getText();
+            
+            
+            if (fname.equals(""))
+            {
+                JOptionPane.showMessageDialog(this,"please enter name");
+                return false;
+            }
+            try{
+                    String selectedValue = "";
+                if (btnmale.isSelected()) {
+                    selectedValue = btnmale.getText();
+                } else if (btnfemale.isSelected()) {
+                    selectedValue = btnfemale.getText();
+                } else if (btnOther.isSelected()) {
+                    selectedValue = btnOther.getText();
+                }
+                else{
+                    JOptionPane.showMessageDialog(null,"Select Gender");
+                    return false;
+                }
+            }
+               catch(Exception e){
+                       e.printStackTrace();
+                       }
+          
+           
+                if (Phone.equals(""))
+            {
+                JOptionPane.showMessageDialog(this,"please enter phone number");
+                return false;
+            }
+                    if (Phone.length()!=10)
+            {
+                JOptionPane.showMessageDialog(this,"Phone number should be of 10 digits");
+                return false;
+            }
+                    if (Citizen.equals(""))
+            {
+            JOptionPane.showMessageDialog(this,"please enter Citizenship number");
+            return false;
+            }
+           else{
 
+                return true;
+                }
+        }
     private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
-        // TODO add your handling code here:
+        boolean pra=validation();
+        if(pra==false){
+            
+        }
+        else{
+            Connection conn = FRONT.dbConnect();
+            try{
+                    String selectedValue = "";
+                if (btnmale.isSelected()) {
+                    selectedValue = btnmale.getText();
+                } else if (btnfemale.isSelected()) {
+                    selectedValue = btnfemale.getText();
+                } else if (btnOther.isSelected()) {
+                    selectedValue = btnOther.getText();
+                }
+                Statement stmt=conn.createStatement();
+                            String sql="insert into cusinfo values('"+txt_CusName.getText()+"','"+selectedValue+"','"+txtcitizen.getText()+"','"+phone.getText()+"')";
+                            stmt.executeUpdate(sql);
+                            System.out.println("Data inserted");
+                            JOptionPane.showMessageDialog(null,"Sucessfully Added");
+                            new Cus_info().setVisible(false);
+                    dispose();
+                    new dashboard().setVisible(true);
+            }
+            catch(Exception e){
+            e.printStackTrace();
+        }
+        }
     }//GEN-LAST:event_submitActionPerformed
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_backActionPerformed
-    
+       
     /**
      * @param args the command line arguments
      */
@@ -199,16 +286,17 @@ public class Cus_info extends javax.swing.JFrame {
     private javax.swing.JLabel Gender;
     private javax.swing.JLabel Header;
     private javax.swing.JLabel Heading;
-    private javax.swing.JCheckBox Other;
     private javax.swing.JLabel Phone_num;
     private javax.swing.JButton back;
-    private javax.swing.JCheckBox female;
+    private javax.swing.JCheckBox btnOther;
+    private javax.swing.JCheckBox btnfemale;
+    private javax.swing.JCheckBox btnmale;
+    private javax.swing.ButtonGroup grpbtn;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JCheckBox male;
     private javax.swing.JLabel nagarikta;
+    private javax.swing.JTextField phone;
     private javax.swing.JButton submit;
     private javax.swing.JTextField txt_CusName;
-    private javax.swing.JTextField txt_Phone_num;
-    private javax.swing.JTextField txt_nagarikta;
+    private javax.swing.JTextField txtcitizen;
     // End of variables declaration//GEN-END:variables
 }
