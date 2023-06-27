@@ -194,15 +194,16 @@ public class login extends javax.swing.JFrame {
                     boolean check =result.next();
                     if (check){
                         JOptionPane.showMessageDialog(null,"Sucessfully LogedIn");
+                        new login().setVisible(false);
+                    dispose();
+                    new dashboard().setVisible(true);
                     }
                     else{
                         JOptionPane.showMessageDialog(null,"Username or Password didn't match,Please enter valid information");
                     }
                     
                     
-                    new login().setVisible(false);
-                    dispose();
-                    new dashboard().setVisible(true);
+                    
         }
         catch(Exception e){
             e.printStackTrace();

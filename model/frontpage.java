@@ -52,6 +52,7 @@ public class frontpage extends javax.swing.JFrame {
 
         PHOTOLBL.setBackground(new java.awt.Color(255, 255, 255));
         PHOTOLBL.setIcon(new javax.swing.ImageIcon("C:\\Users\\rujan\\Desktop\\2.png")); // NOI18N
+        PHOTOLBL.setText("b");
         PHOTOPANEL.add(PHOTOLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 150, 350, 350));
 
         toppanel.setBackground(new java.awt.Color(51, 204, 255));

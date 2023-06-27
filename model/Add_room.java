@@ -4,9 +4,14 @@
  */
 package model;
 
+import com.mysql.cj.protocol.Resultset;
 import database.FRONT;
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.dashboard;
 
@@ -40,14 +45,13 @@ public class Add_room extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         txtavailability = new javax.swing.JComboBox<>();
-        txtroomnumber = new javax.swing.JTextField();
         txtbedtype = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         txtprice = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         txtcleaning = new javax.swing.JComboBox<>();
-        jButton3 = new javax.swing.JButton();
+        txtroomnumber = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -93,14 +97,6 @@ public class Add_room extends javax.swing.JFrame {
             }
         });
 
-        txtroomnumber.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        txtroomnumber.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        txtroomnumber.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtroomnumberActionPerformed(evt);
-            }
-        });
-
         txtbedtype.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtbedtype.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Single", "Double", "Suit", "Deluxe", " ", " " }));
         txtbedtype.addActionListener(new java.awt.event.ActionListener() {
@@ -128,7 +124,17 @@ public class Add_room extends javax.swing.JFrame {
         txtcleaning.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtcleaning.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Clean", "Dirty" }));
 
-        jButton3.setText("Check");
+        txtroomnumber.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select", "101", "102", "103", "104", "105", "106", "107", "108", "109", "110" }));
+        txtroomnumber.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                txtroomnumberItemStateChanged(evt);
+            }
+        });
+        txtroomnumber.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtroomnumberActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -156,11 +162,7 @@ public class Add_room extends javax.swing.JFrame {
                             .addComponent(txtbedtype, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtprice, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
                             .addComponent(txtcleaning, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(txtroomnumber)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(19, 19, 19))))
+                            .addComponent(txtroomnumber, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel1)))
@@ -177,10 +179,9 @@ public class Add_room extends javax.swing.JFrame {
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtroomnumber, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2)
-                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE))
-                        .addGap(25, 25, 25)
+                            .addComponent(txtroomnumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtavailability, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3))
@@ -220,7 +221,7 @@ public class Add_room extends javax.swing.JFrame {
         {
             
             String roomno;
-            roomno=txtroomnumber.getText();
+            roomno=(String)txtroomnumber.getSelectedItem();
             String Price;
             Price = txtprice.getText();
             
@@ -255,7 +256,7 @@ public class Add_room extends javax.swing.JFrame {
             Connection conn = FRONT.dbConnect();
                 try{
             Statement stmt=conn.createStatement();
-            String sql="insert into addroom values('"+txtroomnumber.getText()+"','"+txtavailability.getSelectedItem()+"','"+txtcleaning.getSelectedItem()+"','"+txtprice.getText()+"','"+txtbedtype.getSelectedItem()+"')";
+            String sql="insert into addroom values('"+txtroomnumber.getSelectedItem()+"','"+txtavailability.getSelectedItem()+"','"+txtcleaning.getSelectedItem()+"','"+txtprice.getText()+"','"+txtbedtype.getSelectedItem()+"')";
                     stmt.executeUpdate(sql);
                     System.out.println("Data inserted");
                     JOptionPane.showMessageDialog(null,"Sucessfully Added");
@@ -288,12 +289,38 @@ public class Add_room extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void txtroomnumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtroomnumberActionPerformed
-        // TODO add your handling code here:
+      
     }//GEN-LAST:event_txtroomnumberActionPerformed
 
+    private void txtroomnumberItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_txtroomnumberItemStateChanged
+        String room_no=txtroomnumber.getSelectedItem().toString();
+        Connection conn = FRONT.dbConnect();
+       try{
+        String sql="SELECT * FROM addroom Where Room_number='"+room_no+"'";
+        Statement stmt=conn.prepareStatement(sql);
+//        ResultSet rs;
+//            sr = stmt.executeQuery();
+//        while(rs.next()){
+//        }
+       }
+        catch(Exception e){
+           e.printStackTrace();
+    }//GEN-LAST:event_txtroomnumberItemStateChanged
+    }
     /**
      * @param args the command line arguments
-     */
+//     */
+//        catch (SQLException ex) {
+//            Logger.getLogger(Add_room.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    /**
+//     * @param args the command line arguments
+//     */
+//        catch (SQLException ex) {
+//            Logger.getLogger(Add_room.class.getName()).log(Level.SEVERE, null, ex); 
+//        }/**
+//     * @param args the command line arguments
+//     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -329,7 +356,6 @@ public class Add_room extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -342,6 +368,6 @@ public class Add_room extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> txtbedtype;
     private javax.swing.JComboBox<String> txtcleaning;
     private javax.swing.JTextField txtprice;
-    private javax.swing.JTextField txtroomnumber;
+    private javax.swing.JComboBox<String> txtroomnumber;
     // End of variables declaration//GEN-END:variables
 }

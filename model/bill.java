@@ -4,6 +4,15 @@
  */
 package model;
 
+import database.FRONT;
+import java.awt.Font;
+import java.sql.Connection;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+import java.sql.ResultSet;
+import java.lang.String;
+import java.text.AttributedCharacterIterator;
+import java.util.Map;
 /**
  *
  * @author rujan
@@ -26,41 +35,93 @@ public class bill extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtprint = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jTextArea1.addAncestorListener(new javax.swing.event.AncestorListener() {
+        txtprint.setColumns(20);
+        txtprint.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtprint.setRows(5);
+        txtprint.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        txtprint.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                jTextArea1AncestorAdded(evt);
+                txtprintAncestorAdded(evt);
             }
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
         });
-        jScrollPane1.setViewportView(jTextArea1);
+        jScrollPane2.setViewportView(txtprint);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 74, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextArea1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jTextArea1AncestorAdded
-        
-    }//GEN-LAST:event_jTextArea1AncestorAdded
+    private void txtprintAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_txtprintAncestorAdded
+                       Connection conn = FRONT.dbConnect();
+                try{
+            Statement stmt=conn.createStatement();
+            String sql="SELECT * FROM checkout ORDER BY  customerid DESC LIMIT 1";
+//                    stmt.executeUpdate(sql);
+                    ResultSet rs = stmt.executeQuery(sql);
+                    rs.next();
+                    
+                    txtprint.setText(txtprint.getText()+"*****************************"+"\n");
+                    Font boldFont = new Font("Segoe UI", Font.BOLD, 40);
+                    txtprint.setFont(boldFont);
+                    txtprint.setText(txtprint.getText()+"       CheckOut Bill"+"\n");
+                    
+                    txtprint.setFont(new Font("Segoe UI",0,18));
+                    txtprint.setText(txtprint.getText()+"*****************************"+"\n");
+                    txtprint.setText(txtprint.getText()+"\n");
+                    txtprint.setText(txtprint.getText()+"Customer ID::"+"    "+rs.getString("customerid")+"\n");
+                    txtprint.setText(txtprint.getText()+"-----------------------------"+"\n");
+                    txtprint.setText(txtprint.getText()+"Room No.::"+rs.getString("Roomno")+"\n");
+                    txtprint.setText(txtprint.getText()+"-----------------------------"+"\n");
+                    txtprint.setText(txtprint.getText()+"Check In Time::"+rs.getString("checintime")+"\n");
+                   
+                    txtprint.setText(txtprint.getText()+"Check Out Time::"+rs.getString("checkouttime")+"\n");
+                    txtprint.setText(txtprint.getText()+"-----------------------------"+"\n");
+                    txtprint.setText(txtprint.getText()+"Total::"+rs.getString("total")+"\n");
+
+//                    System.out.println("Data inserted");
+//                    JOptionPane.showMessageDialog(null,"Sucessfully Added");
+//                    new Add_emp().setVisible(false);
+//                    dispose();
+//                    new dashboard().setVisible(true);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_txtprintAncestorAdded
 
     /**
      * @param args the command line arguments
@@ -98,7 +159,8 @@ public class bill extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextArea txtprint;
     // End of variables declaration//GEN-END:variables
 }

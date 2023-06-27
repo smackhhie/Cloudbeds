@@ -342,7 +342,6 @@ public class register extends javax.swing.JFrame {
                     new login().setVisible(true);
         }
         catch(Exception e){
-            e.printStackTrace();
             JOptionPane.showMessageDialog(null,"Username already exist");
         }
                 }
