@@ -19,7 +19,7 @@ public class roomAva_Controller {
     
     public roomAva_Controller(roomAva_View view){
         this.view=view;
-        this.model = new roomAva_Model(view.getSelectedAvai(), view.getSelectedclean(), view.getSelectedRoomNumber(), view.getRate());
+//        this.model = new roomAva_Model(view.getSelectedAvai(), view.getSelectedclean(), view.getSelectedRoomNumber(), view.getRate());
 
     }
 

@@ -14,7 +14,6 @@ import javax.swing.JTextField;
 
 
 public class roomAva_View extends javax.swing.JFrame {
-    
     private DefaultTableModel tableModel;
     private roomAva_Controller controller;
     DefaultTableModel dtm=null;
@@ -24,20 +23,7 @@ public class roomAva_View extends javax.swing.JFrame {
     }
     public DefaultTableModel getTableModel() {
         return dtm;
-    }
-    public String getSelectedAvai(){
-        String avai=(String) comboAvailability.getSelectedItem();
-        return avai;
-    }
-     public String getSelectedclean(){
-        String clean=(String) combo_Status.getSelectedItem();
-        return clean;
-    }
-    public int getRate(){
-        String rate=(String) txt_rate.getText();
-        return Integer.parseInt(rate);
-        
-    }
+    }  
 
     public roomAva_View() {
     initComponents();
@@ -50,7 +36,7 @@ public class roomAva_View extends javax.swing.JFrame {
     roomAva_Model model;
     
     public roomAva_Model getData(){
-       
+        
     int room_no = Integer.parseInt((String) comboRoom_No.getSelectedItem());
     int rate = Integer.parseInt((String) txt_rate.getText());
     String status = (String) combo_Status.getSelectedItem();

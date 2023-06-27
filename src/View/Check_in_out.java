@@ -230,7 +230,7 @@ public checkin_Model getData() {
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(456, 0, 460, -1));
 
         jLabel9.setFont(new java.awt.Font("Segoe Script", 0, 14)); // NOI18N
-        jLabel9.setText("Phnone Number");
+        jLabel9.setText("Phone Number");
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("Segoe Script", 0, 14)); // NOI18N
