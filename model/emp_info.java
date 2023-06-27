@@ -499,23 +499,25 @@ boolean validation()
                 } else if (btnothers.isSelected()) {
                     selectedValue = btnothers.getText();
                 }
-                String sql = "UPDATE empinfo SET fname = ?, gender = ?, job = ?, Salary = ?, phone = ?, WHERE citizen = ?";
-                java.sql.PreparedStatement stmt =conn.prepareStatement(sql);
-//                String sql="UPDATE empinfo set('"+txtname.getText()+"','"+selectedValue+"','"+txtselect.getSelectedItem()+"','"+salary.getText()+"','"+phone.getText()+"','"+citizenno.getText()+"')";
+//                String sql = "UPDATE empinfo SET fname = ?, gender = ?, job = ?, Salary = ?, phone = ?, WHERE citizen = ?";
+               
+                String sql="UPDATE addemp set fname='"+txtname.getText()+"',gender='"+selectedValue+"',job='"+txtselect.getSelectedItem()+"',Salary='"+salary.getText()+"',phone='"+phone.getText()+"',citizen='"+citizenno.getText()+"'where citizen='"+citizenno.getText()+"'";
 //                Statement stmt;
 //                stmt =conn.prepareStatement(sql);
-                stmt.setString(1, txtname.getText()); 
-                stmt.setString(2, selectedValue);
-                stmt.setString(3, txtselect.getSelectedItem().toString());
-                stmt.setString(4, salary.getText()); 
-                stmt.setString(5, phone.getText()); 
-                stmt.setString(6, citizenno.getText());
+//                stmt.setString(1, txtname.getText()); 
+//                stmt.setString(2, selectedValue);
+//                stmt.setString(3, txtselect.getSelectedItem().toString());
+//                stmt.setString(4, salary.getText()); 
+//                stmt.setString(5, phone.getText()); 
+//                stmt.setString(6, citizenno.getText());
+ java.sql.PreparedStatement stmt =conn.prepareStatement(sql);
                 stmt.executeUpdate(sql);
                 System.out.println("Data inserted");
+                
                 JOptionPane.showMessageDialog(null,"Sucessfully updated");
-                new emp_info().setVisible(false);
-                dispose();
-                new dashboard().setVisible(true);
+//                new emp_info().setVisible(false);
+//                dispose();
+//                new dashboard().setVisible(true);
             }
             catch(Exception e){
                 e.printStackTrace();
