@@ -153,7 +153,7 @@
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="btnexit" min="-2" pref="105" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="btnback" min="-2" pref="110" max="-2" attributes="0"/>
+                              <Component id="btndelete" min="-2" pref="110" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="btnsummit" min="-2" pref="120" max="-2" attributes="0"/>
                           </Group>
@@ -240,7 +240,7 @@
                       <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btnsummit" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
-                          <Component id="btnback" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
+                          <Component id="btndelete" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
                           <Component id="btnexit" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
@@ -434,7 +434,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnsummitActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnback">
+            <Component class="javax.swing.JButton" name="btndelete">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="99" green="99" red="99" type="rgb"/>
@@ -453,7 +453,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnbackActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btndeleteActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel9">

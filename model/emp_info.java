@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import java.sql.PreparedStatement;
 
 /**
  *
@@ -54,7 +55,7 @@ public class emp_info extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         citizenno = new javax.swing.JTextField();
         btnsummit = new javax.swing.JButton();
-        btnback = new javax.swing.JButton();
+        btndelete = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         btnexit = new javax.swing.JButton();
 
@@ -190,14 +191,14 @@ public class emp_info extends javax.swing.JFrame {
             }
         });
 
-        btnback.setBackground(new java.awt.Color(153, 153, 153));
-        btnback.setFont(new java.awt.Font("Lucida Bright", 1, 14)); // NOI18N
-        btnback.setForeground(new java.awt.Color(255, 255, 255));
-        btnback.setText("Delete");
-        btnback.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        btnback.addActionListener(new java.awt.event.ActionListener() {
+        btndelete.setBackground(new java.awt.Color(153, 153, 153));
+        btndelete.setFont(new java.awt.Font("Lucida Bright", 1, 14)); // NOI18N
+        btndelete.setForeground(new java.awt.Color(255, 255, 255));
+        btndelete.setText("Delete");
+        btndelete.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btndelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnbackActionPerformed(evt);
+                btndeleteActionPerformed(evt);
             }
         });
 
@@ -223,7 +224,7 @@ public class emp_info extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(btnexit, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnback, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btndelete, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnsummit, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -292,7 +293,7 @@ public class emp_info extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnsummit, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnback, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btndelete, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnexit, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(17, 17, 17))
         );
@@ -502,33 +503,47 @@ boolean validation()
 //                String sql = "UPDATE empinfo SET fname = ?, gender = ?, job = ?, Salary = ?, phone = ?, WHERE citizen = ?";
                
                 String sql="UPDATE addemp set fname='"+txtname.getText()+"',gender='"+selectedValue+"',job='"+txtselect.getSelectedItem()+"',Salary='"+salary.getText()+"',phone='"+phone.getText()+"',citizen='"+citizenno.getText()+"'where citizen='"+citizenno.getText()+"'";
-//                Statement stmt;
-//                stmt =conn.prepareStatement(sql);
-//                stmt.setString(1, txtname.getText()); 
-//                stmt.setString(2, selectedValue);
-//                stmt.setString(3, txtselect.getSelectedItem().toString());
-//                stmt.setString(4, salary.getText()); 
-//                stmt.setString(5, phone.getText()); 
-//                stmt.setString(6, citizenno.getText());
  java.sql.PreparedStatement stmt =conn.prepareStatement(sql);
                 stmt.executeUpdate(sql);
                 System.out.println("Data inserted");
                 
                 JOptionPane.showMessageDialog(null,"Sucessfully updated");
-//                new emp_info().setVisible(false);
-//                dispose();
-//                new dashboard().setVisible(true);
+                new emp_info().setVisible(false);
+                dispose();
+                new emp_info().setVisible(true);
             }
             catch(Exception e){
                 e.printStackTrace();
             }
     }//GEN-LAST:event_btnsummitActionPerformed
     }
-    private void btnbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbackActionPerformed
-        new emp_info().setVisible(false);
+    private void btndeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndeleteActionPerformed
+                    
+        Connection con = FRONT.dbConnect();
+        try{
+            PreparedStatement pst = con.prepareStatement("delete from addemp where fname = ?");           
+//            int fname = 0;
+            pst.setString(1, txtname.getText());
+          
+            pst.executeUpdate();
+            
+                JOptionPane.showMessageDialog(this, "Deleted sucessfully");  
+                 new emp_info().setVisible(false);
         dispose();
-        new dashboard().setVisible(true);
-    }//GEN-LAST:event_btnbackActionPerformed
+        new emp_info().setVisible(true);
+//                clearTable();
+//                setRecordsToTable();
+            
+          
+//                JOptionPane.showMessageDialog(this, "Failed--");
+            
+            
+            
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(this, "Failed");
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btndeleteActionPerformed
 
     private void jTable1AncestorMoved(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jTable1AncestorMoved
         // TODO add your handling code here:
@@ -598,7 +613,7 @@ boolean validation()
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnback;
+    private javax.swing.JButton btndelete;
     private javax.swing.JButton btnexit;
     private javax.swing.JRadioButton btnfemale;
     private javax.swing.JRadioButton btnmale;

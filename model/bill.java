@@ -36,10 +36,15 @@ public class bill extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtprint = new javax.swing.JTextArea();
+        jLabel2 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cb2.png"))); // NOI18N
 
         txtprint.setColumns(20);
         txtprint.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -56,53 +61,81 @@ public class bill extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(txtprint);
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel2.setText("CheckOut Bill");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(54, 54, 54)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(171, 171, 171)
+                        .addComponent(jLabel2)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 74, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(17, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel2)
+                .addGap(4, 4, 4)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
+
+        jButton1.setText("Print");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(81, 81, 81))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtprintAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_txtprintAncestorAdded
                        Connection conn = FRONT.dbConnect();
                 try{
-            Statement stmt=conn.createStatement();
-            String sql="SELECT * FROM checkout ORDER BY  customerid DESC LIMIT 1";
+//            Statement stmt=conn.createStatement();
+            String sql="SELECT * FROM checkout ORDER BY customerid DESC LIMIT 1";
 //                    stmt.executeUpdate(sql);
-                    ResultSet rs = stmt.executeQuery(sql);
+                     java.sql.PreparedStatement stmt =conn.prepareStatement(sql);
+                    ResultSet rs = stmt.executeQuery();
                     rs.next();
                     
-                    txtprint.setText(txtprint.getText()+"*****************************"+"\n");
-                    Font boldFont = new Font("Segoe UI", Font.BOLD, 40);
-                    txtprint.setFont(boldFont);
-                    txtprint.setText(txtprint.getText()+"       CheckOut Bill"+"\n");
-                    
-                    txtprint.setFont(new Font("Segoe UI",0,18));
-                    txtprint.setText(txtprint.getText()+"*****************************"+"\n");
+//                    txtprint.setText(txtprint.getText()+"\t*****************************"+"\n");
+//                    txtprint.setText(txtprint.getText()+"\tCheckOut Bill"+"\n");      
+//                    txtprint.setText(txtprint.getText()+"\t*****************************"+"\n");
+                      txtprint.setText(txtprint.getText()+"\t Dilibazar,kathmandu");
                     txtprint.setText(txtprint.getText()+"\n");
-                    txtprint.setText(txtprint.getText()+"Customer ID::"+"    "+rs.getString("customerid")+"\n");
+                    txtprint.setText(txtprint.getText()+"\nCustomer ID::"+"    "+rs.getString("customerid")+"\n");
                     txtprint.setText(txtprint.getText()+"-----------------------------"+"\n");
                     txtprint.setText(txtprint.getText()+"Room No.::"+rs.getString("Roomno")+"\n");
                     txtprint.setText(txtprint.getText()+"-----------------------------"+"\n");
@@ -122,6 +155,15 @@ public class bill extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }//GEN-LAST:event_txtprintAncestorAdded
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try{
+            txtprint.print();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -159,6 +201,9 @@ public class bill extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea txtprint;

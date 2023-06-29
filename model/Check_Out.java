@@ -223,11 +223,11 @@ public class Check_Out extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null,"Sucessfully Created");
                     new Check_Out().setVisible(false);
                     dispose();
-                    new dashboard().setVisible(true);
+                    new bill().setVisible(true);
         }
         catch(Exception e){
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(null,"Username already exist");
+//            e.printStackTrace();
+            JOptionPane.showMessageDialog(null,"CustomerId cannot be that long");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
