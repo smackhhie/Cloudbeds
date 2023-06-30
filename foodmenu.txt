@@ -1,0 +1,33 @@
+create database hotel_management_system;
+use hotel_management_system;
+create table maincourse(
+foodid int primary key auto_increment,
+food varchar(20) not null,
+price float(20) not null);
+desc maincourse;
+insert into maincourse (food,price) values('Thakali Veg',800);
+insert into maincourse (food,price) values('Thakali Non-Veg',1200);
+insert into maincourse (food,price) values('Chicken Schnitzel',2100);
+insert into maincourse (food,price) values('Halloumi Burger',600);
+
+create table drinks(
+foodid int primary key auto_increment,
+drink varchar(20) not null,
+price float(20) not null);
+
+insert into drinks (drink,price) values('Milkshake',250);
+insert into drinks (drink,price) values('Cola',150);
+insert into drinks (drink,price) values('Coffee',300);
+insert into drinks (drink,price) values('Lemon Tea',100);
+insert into drinks (drink,price) values('Mango Float',150);
+
+create table desert(
+foodid int primary key auto_increment,
+desert varchar(20) not null,
+price float(20) not null);
+
+insert into desert (desert,price) values('Strawberry Pudding',400);
+insert into desert (desert,price) values('Chocolate',500);
+insert into desert (desert,price) values('Strawcake',450);
+insert into desert (desert,price) values('Chocolate',170);
+insert into desert (desert,price) values('Tiramasu',200);
