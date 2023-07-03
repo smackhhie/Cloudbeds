@@ -39,16 +39,20 @@ public class bill extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtprint = new javax.swing.JTextArea();
-        jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cb2.png"))); // NOI18N
 
+        txtprint.setEditable(false);
         txtprint.setColumns(20);
         txtprint.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtprint.setRows(5);
+        txtprint.setBorder(null);
         txtprint.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtprint.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
@@ -61,34 +65,26 @@ public class bill extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(txtprint);
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel2.setText("CheckOut Bill");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(54, 54, 54)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(171, 171, 171)
-                        .addComponent(jLabel2)))
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(17, Short.MAX_VALUE)
+                .addContainerGap(53, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2)
-                .addGap(4, 4, 4)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jButton1.setText("Print");
@@ -98,22 +94,34 @@ public class bill extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setText("Back");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(layout.createSequentialGroup()
+                .addGap(71, 71, 71)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(133, 133, 133)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(81, 81, 81))
+                .addContainerGap(83, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(12, 12, 12))
         );
 
         pack();
@@ -123,33 +131,24 @@ public class bill extends javax.swing.JFrame {
     private void txtprintAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_txtprintAncestorAdded
                        Connection conn = FRONT.dbConnect();
                 try{
-//            Statement stmt=conn.createStatement();
             String sql="SELECT * FROM checkout ORDER BY customerid DESC LIMIT 1";
-//                    stmt.executeUpdate(sql);
                      java.sql.PreparedStatement stmt =conn.prepareStatement(sql);
                     ResultSet rs = stmt.executeQuery();
                     rs.next();
                     
-//                    txtprint.setText(txtprint.getText()+"\t*****************************"+"\n");
-//                    txtprint.setText(txtprint.getText()+"\tCheckOut Bill"+"\n");      
-//                    txtprint.setText(txtprint.getText()+"\t*****************************"+"\n");
-                      txtprint.setText(txtprint.getText()+"\t Dilibazar,kathmandu");
+                    txtprint.setText(txtprint.getText()+"\tCheckOut Bill"+"\n");      
+                      txtprint.setText(txtprint.getText()+"\t\t Dilibazar,kathmandu\n");
+                      txtprint.setText(txtprint.getText()+"\t\t Contact No:.9817065857");
                     txtprint.setText(txtprint.getText()+"\n");
-                    txtprint.setText(txtprint.getText()+"\nCustomer ID::"+"    "+rs.getString("customerid")+"\n");
-                    txtprint.setText(txtprint.getText()+"-----------------------------"+"\n");
-                    txtprint.setText(txtprint.getText()+"Room No.::"+rs.getString("Roomno")+"\n");
-                    txtprint.setText(txtprint.getText()+"-----------------------------"+"\n");
-                    txtprint.setText(txtprint.getText()+"Check In Time::"+rs.getString("checintime")+"\n");
-                   
-                    txtprint.setText(txtprint.getText()+"Check Out Time::"+rs.getString("checkouttime")+"\n");
-                    txtprint.setText(txtprint.getText()+"-----------------------------"+"\n");
-                    txtprint.setText(txtprint.getText()+"Total::"+rs.getString("total")+"\n");
-
-//                    System.out.println("Data inserted");
-//                    JOptionPane.showMessageDialog(null,"Sucessfully Added");
-//                    new Add_emp().setVisible(false);
-//                    dispose();
-//                    new dashboard().setVisible(true);
+                    txtprint.setText(txtprint.getText()+"\nCustomer ID::  "+"    "+rs.getString("customerid")+"\n");
+                    txtprint.setText(txtprint.getText()+"\n");
+                    txtprint.setText(txtprint.getText()+"Room No.::          "+rs.getString("Roomno")+"\n");
+                    txtprint.setText(txtprint.getText()+"\n");
+                    txtprint.setText(txtprint.getText()+"Check In Time::    "+rs.getString("checintime")+"\n");
+                   txtprint.setText(txtprint.getText()+"\n");
+                    txtprint.setText(txtprint.getText()+"Check Out Time::   "+rs.getString("checkouttime")+"\n");
+                    txtprint.setText(txtprint.getText()+"----------------------------------------------------------"+"\n");
+                    txtprint.setText(txtprint.getText()+"\t\tTotal::"+rs.getString("total")+"\n");
         }
         catch(Exception e){
             e.printStackTrace();
@@ -164,6 +163,12 @@ public class bill extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+                            new bill().setVisible(false);
+                    dispose();
+                    new Check_Out().setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -202,8 +207,8 @@ public class bill extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea txtprint;
