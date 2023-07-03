@@ -59,7 +59,7 @@ class checkinListener implements ActionListener {
     public boolean checkcheckInData(checkin_Model obj) throws Exception {
         Class.forName("com.mysql.cj.jdbc.Driver");
         conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cloudbeds", "root", "15anup#$");
-        String sql = "INSERT INTO checkIn_DB (customer_name, phone_number, amount_paid, checkin_time, duration, gender, room_no, room_type, amount_due, customerNO) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO checkIn_DB (customer_name, phone_number, amount_paid, checkin_time, duration, gender, room_no, room_type, amount_due, customerNO,package) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         pst = conn.prepareStatement(sql);
         pst.setString(1, obj.getFullname());
         pst.setString(2, obj.getPhNumber());
@@ -73,6 +73,11 @@ class checkinListener implements ActionListener {
         pst.setString(8, obj.getRoomType());
         pst.setInt(9, obj.getAmountRemaining());
         pst.setInt(10, obj.getCustomerId());
+        if (view.getpackageStatus().equals("Package")) {
+            pst.setString(11, "Yes");
+        } else {
+        pst.setString(11, "No");
+        }
 
         int rowsAffected = pst.executeUpdate();
 
@@ -112,10 +117,24 @@ class checkinListener implements ActionListener {
     }
     return lastCustomerId;
 }
-
-
-    public int getRoomRate(int roomNumber) {
-        int roomRate = 0;
+        public int getRoomRate(int roomNumber) {
+    int roomRate = 0;
+   
+    if (view.getpackageStatus().equals("Package")) {
+        try {
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cloudbeds", "root", "15anup#$");
+            String query = "SELECT package_rate FROM rooms WHERE roomNo = ?";
+            pst = conn.prepareStatement(query);
+            pst.setInt(1, roomNumber);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                roomRate = rs.getInt("package_rate");
+            }
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    } else {
         try {
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cloudbeds", "root", "15anup#$");
             String query = "SELECT room_rate FROM rooms WHERE roomNo = ?";
@@ -129,9 +148,12 @@ class checkinListener implements ActionListener {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        System.out.println(roomRate);
-        return roomRate;
     }
+    System.out.println(roomRate);
+    return roomRate;
+}
+
+
 
     public void refreshRoomNumbers(String roomType, JComboBox<String> combo_rNumber) {
         try {
@@ -182,6 +204,7 @@ class checkinListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
+                
                 int amountDue = calculateAmountDue();
                 view.getTxt_amtDue().setText(String.valueOf(amountDue));
             } catch (Exception ex) {

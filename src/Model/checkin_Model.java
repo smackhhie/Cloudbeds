@@ -6,7 +6,7 @@ package Model;
 import java.sql.Date;
 
 public class checkin_Model {
-    String fullname, phNumber, gender, roomType;
+    String fullname, phNumber, gender, roomType, room_package;
     int amountPaid, duration, roomNumber, customerId, amountRemaining;
     Date checkinDate;
 
@@ -35,6 +35,13 @@ public class checkin_Model {
         } else {
         throw new IllegalArgumentException("Invalid phone number format");
         }
+    }
+        public String getPackage() {
+        return room_package;
+    }
+
+    public void setPackage(String room_package) {
+        this.room_package = room_package;
     }
     private boolean isValidPhoneNumber(String phNumber) {
     // Validate phone number format (10 digits and integers only)
@@ -94,8 +101,8 @@ public class checkin_Model {
     public void setAmountRemaining(int amountRemaining) {
         this.amountRemaining = amountRemaining;
     }
-    public checkin_Model(String fullName, String phoneNumber, int amountPaid, int duration, String gender, String roomType, int roomNumber, Date checkinDate, int customerId, int amountRemaining) {
- 
+    public checkin_Model(String fullName,String room_package, String phoneNumber, int amountPaid, int duration, String gender, String roomType, int roomNumber, Date checkinDate, int customerId, int amountRemaining) {
+    this.room_package=room_package;
     this.fullname = fullName;
     this.phNumber = phoneNumber;
     this.amountPaid = amountPaid;

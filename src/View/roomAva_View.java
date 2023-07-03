@@ -9,21 +9,28 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.Dimension;
 import Model.roomAva_Model;
 import Controller.roomAva_Controller;
+import java.awt.event.ActionListener;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 
 
 public class roomAva_View extends javax.swing.JFrame {
     private DefaultTableModel tableModel;
+    
     private roomAva_Controller controller;
+    
     DefaultTableModel dtm=null;
+    
     public int getSelectedRoomNumber() {
     String roomNumberStr = (String) comboRoom_No.getSelectedItem();
     return Integer.parseInt(roomNumberStr);
     }
+    
     public DefaultTableModel getTableModel() {
         return dtm;
-    }  
+    }
+    
+
 
     public roomAva_View() {
     initComponents();
@@ -33,20 +40,22 @@ public class roomAva_View extends javax.swing.JFrame {
     tableRooms.getTableHeader().setPreferredSize(new Dimension(tableRooms.getTableHeader().getPreferredSize().width, 50));
     tableRooms.setRowHeight(50); 
     }
-    roomAva_Model model;
     
-    public roomAva_Model getData(){
-        
+    roomAva_Model model;
+    public roomAva_Model getData(){   
     int room_no = Integer.parseInt((String) comboRoom_No.getSelectedItem());
     int rate = Integer.parseInt((String) txt_rate.getText());
     String status = (String) combo_Status.getSelectedItem();
     String availability= (String) comboAvailability.getSelectedItem();
-    
-    model = new roomAva_Model(availability, status, room_no, rate);
-
+    int package_rate = Integer.parseInt((String) txt_prate.getText());
+    model = new roomAva_Model(availability, status, room_no, rate, package_rate);
     return model;
     }
     
+    public void updateRoom (ActionListener log)
+    {
+      btn_Update.addActionListener(log);
+    }
 
 
     
@@ -60,6 +69,7 @@ public class roomAva_View extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         comboAvailability = new javax.swing.JComboBox<>();
+        txt_prate = new javax.swing.JTextField();
         txt_rate = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         comboRoom_No = new javax.swing.JComboBox<>();
@@ -74,6 +84,7 @@ public class roomAva_View extends javax.swing.JFrame {
         btn_Update = new javax.swing.JButton();
         btn_ShowRooms = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -83,116 +94,116 @@ public class roomAva_View extends javax.swing.JFrame {
         tableRooms.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tableRooms.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Room No", "Type", "Rate", "Availability", "Status"
+                "Room No", "Type", "Rate", "Availability", "Status", "Package_Rate"
             }
         ));
         tableRooms.setRowHeight(50);
         tableRooms.setShowGrid(true);
         jScrollPane1.setViewportView(tableRooms);
 
-        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 570, 410));
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 570, 410));
 
         jLabel8.setFont(new java.awt.Font("Georgia", 2, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(129, 133, 137));
@@ -201,39 +212,46 @@ public class roomAva_View extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel6.setText("Availability");
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 330, 120, 30));
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 340, 120, 30));
 
         comboAvailability.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "available", "occupied" }));
-        jPanel2.add(comboAvailability, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 330, 150, 30));
+        jPanel2.add(comboAvailability, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 340, 150, 30));
+
+        txt_prate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_prateActionPerformed(evt);
+            }
+        });
+        jPanel2.add(txt_prate, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 240, 150, 30));
 
         txt_rate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_rateActionPerformed(evt);
             }
         });
-        jPanel2.add(txt_rate, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 210, 150, 30));
+        jPanel2.add(txt_rate, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 190, 150, 30));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel4.setText("Rate");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 220, 120, 30));
+        jLabel4.setText("Package Rate");
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 240, 120, 30));
 
         comboRoom_No.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboRoom_NoActionPerformed(evt);
             }
         });
-        jPanel2.add(comboRoom_No, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 160, 150, 30));
+        jPanel2.add(comboRoom_No, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 140, 150, 30));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel5.setText("Status");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 270, 120, 30));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 290, 120, 30));
 
         combo_Status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "clean", "dirty" }));
-        jPanel2.add(combo_Status, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 270, 150, 30));
+        jPanel2.add(combo_Status, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 290, 150, 30));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setText("Room No");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 160, 120, 30));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 140, 120, 30));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/imagess/cloudbeds-2-removebg-previewww.png"))); // NOI18N
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, 440, 80));
@@ -279,7 +297,7 @@ public class roomAva_View extends javax.swing.JFrame {
                 btn_UpdateActionPerformed(evt);
             }
         });
-        jPanel2.add(btn_Update, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 380, 140, 40));
+        jPanel2.add(btn_Update, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 390, 140, 40));
 
         btn_ShowRooms.setBackground(new java.awt.Color(0, 0, 0));
         btn_ShowRooms.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -295,6 +313,10 @@ public class roomAva_View extends javax.swing.JFrame {
         jLabel1.setBackground(new java.awt.Color(0, 0, 0));
         jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 80, 300, 355));
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel9.setText("Rate");
+        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 190, 120, 30));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 911, 550));
 
@@ -315,6 +337,7 @@ public class roomAva_View extends javax.swing.JFrame {
     private void comboRoom_NoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboRoom_NoActionPerformed
         // TODO add your handling code here:
         controller.refreshRates(getSelectedRoomNumber(), txt_rate);
+        controller.refreshPackageRates(getSelectedRoomNumber(),txt_prate);
         controller.updateStatus(getSelectedRoomNumber(), combo_Status);
         controller.updateAvailabilityStatus(getSelectedRoomNumber(), comboAvailability);
     }//GEN-LAST:event_comboRoom_NoActionPerformed
@@ -323,6 +346,10 @@ public class roomAva_View extends javax.swing.JFrame {
         // TODO add your handling code here:
         controller.updateRoomDetails(model);
     }//GEN-LAST:event_btn_UpdateActionPerformed
+
+    private void txt_prateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_prateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_prateActionPerformed
 
     /**
      * @param args the command line arguments
@@ -375,10 +402,12 @@ public class roomAva_View extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tableRooms;
+    private javax.swing.JTextField txt_prate;
     private javax.swing.JTextField txt_rate;
     // End of variables declaration//GEN-END:variables
 }

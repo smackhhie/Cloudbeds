@@ -7,6 +7,7 @@ import Model.roomAva_Model;
 import View.roomAva_View;
 import java.sql.*;
 import javax.swing.JOptionPane;
+import java.awt.event.ActionListener;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 
@@ -19,11 +20,31 @@ public class roomAva_Controller {
     
     public roomAva_Controller(roomAva_View view){
         this.view=view;
+        view.updateRoom(new UpdateListener());
+        
 //        this.model = new roomAva_Model(view.getSelectedAvai(), view.getSelectedclean(), view.getSelectedRoomNumber(), view.getRate());
 
     }
-
-    
+    class UpdateListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            try {
+                model = view.getData();
+                if (validateFields(model)) {
+                    if (userRegister(model)) {
+                        //view.showMessage("Successfully data inserted");
+                    } else {
+                        //view.showMessage("Not entered");
+                    }
+                } else {
+                    view.showMessage("Please fill in all the fields");
+                }
+            } catch (Exception e1) {
+                System.out.println("Error: " + e1.getMessage());
+            }
+        }
+    }
+//Populate Table-------------------------------------------------------------------------------------------------------    
      public void populateTableFromDatabase() {
         
         view.getTableModel().setRowCount(0);
@@ -42,9 +63,10 @@ public class roomAva_Controller {
                 System.out.println("vvv");
                 String roomAvailability = resultSet.getString("room_availability");
                 String roomStatus = resultSet.getString("room_status");
+                int Package_Rate = resultSet.getInt("package_rate");
 
                 // Add the data to the table model
-                Object[] rowData = { roomNo, roomType, roomRate, roomAvailability, roomStatus };
+                Object[] rowData = { roomNo, roomType, roomRate, roomAvailability, roomStatus,Package_Rate };
                 view.getTableModel().addRow(rowData);
             }
         } catch (SQLException e) {
@@ -64,6 +86,7 @@ public class roomAva_Controller {
         }
          System.out.println("hh");
     }
+//----------------------------------------------------------------------------------------------------------------------
     public void populateRoomNumbers(JComboBox<String> combo) {
     try {
         Class.forName("com.mysql.cj.jdbc.Driver");
@@ -120,6 +143,48 @@ public void refreshRates(int roomNumber, JTextField txt_rate) {
             e.printStackTrace();
         }
     }
+public void refreshPackageRates(int roomNumber, JTextField txt_prate) {
+        roomNumber=view.getSelectedRoomNumber();
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cloudbeds", "root", "15anup#$");
+
+           
+            String query = "SELECT package_rate  FROM rooms WHERE roomNo = '" + roomNumber+ "'";
+
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            String rates = "";
+            
+            while (rs.next()) {
+            int pakroomRates = rs.getInt("package_rate");
+            rates += pakroomRates + ", ";                
+
+            }
+        if (rates.endsWith(", ")) {
+            rates = rates.substring(0, rates.length() - 2);
+        }
+
+        // Set the customer names in the text field
+        txt_prate.setText(rates);
+            
+            rs.close();
+            stmt.close();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+//Update----------------------------------------------------------------------------------------------------------------
+public boolean validateFields(roomAva_Model user) {
+        // Validate if any field is empty
+        return user.getPackage_Rate()!=0 &&
+//                user.getRoom_no()!=0 &&
+                user.getRate()!=0&&
+                !user.getAvailability().isEmpty() &&
+                !user.getStatus().isEmpty();
+
+                }
 
 public void updateStatus(int roomNumber, JComboBox<String> combo_Status) {
     roomNumber = view.getSelectedRoomNumber();
@@ -208,6 +273,41 @@ public void updateRoomDetails(roomAva_Model model) {
     } catch (Exception e) {
         e.printStackTrace();
     }
+}
+    public boolean userRegister(roomAva_Model room) throws Exception {
+    boolean success = false;
+    try {
+        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cloudbeds", "root", "15anup#$");
+        Statement stmt = conn.createStatement();
+
+        String checkQuery = "SELECT * FROM register WHERE NUMBER = '" + user.getPhonenumber() + "'";
+        ResultSet resultSet = stmt.executeQuery(checkQuery);
+
+        if (resultSet.next()) {
+            // Number is already registered
+            JOptionPane.showMessageDialog(null, "Number is already registered", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            // Number is not registered, proceed with account creation
+        String query = "UPDATE rooms SET room_status = ?, room_rate = ?, package_rate = ?, room_availability = ? WHERE roomNo = ?";
+        pst = conn.prepareStatement(query);
+        pst.setString(1, room.getStatus());
+        pst.setInt(2, room.getRate());
+        pst.setString(3,room.getAvailability());
+        
+
+            System.out.println("Data Updated");
+            JOptionPane.showMessageDialog(null, "Updated successfully");
+
+            success = true;
+        }
+        
+    } finally {
+        if (conn != null) {
+            conn.close(); 
+        }
+    }
+    
+    return success;
 }
 //   public void updateStatus(int roomNumber, JComboBox<String> combo_Status) {
 //       roomNumber=view.getSelectedRoomNumber();

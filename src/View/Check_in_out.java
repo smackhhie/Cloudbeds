@@ -19,6 +19,9 @@ public class Check_in_out extends javax.swing.JFrame {
     public JComboBox<String> getCombo_rNumber() {
         return combo_rNumber;
     }
+    public String getpackageStatus() {
+    return combo_pack.getSelectedItem().toString();
+}
     public JComboBox<String> getCombo_rType() {
         return commbo_rType;
         
@@ -77,7 +80,7 @@ public checkin_Model getData() {
     String phoneNumber = txt_Phonenumber.getText();
     int amountPaid = Integer.parseInt(txt_amtPaid.getText());
     int duration = Integer.parseInt(txt_Duration.getText());
-    
+    String room_package=getpackageStatus();
     String gender = "";
     if (RadioButtonM.isSelected()) {
         gender = "Male";
@@ -97,7 +100,7 @@ public checkin_Model getData() {
     // Get the amount remaining
     int amountRemaining = Integer.parseInt(txt_amtDue.getText());
 
-    mymodel = new checkin_Model(fullName, phoneNumber, amountPaid, duration, gender, roomType, roomNumber, checkinDate, customerId, amountRemaining);
+    mymodel = new checkin_Model(fullName, room_package ,phoneNumber, amountPaid, duration, gender, roomType, roomNumber, checkinDate, customerId, amountRemaining);
     return mymodel;
 }
   public void addCheckin(ActionListener log)
@@ -128,6 +131,7 @@ public checkin_Model getData() {
 
         btngroup = new javax.swing.ButtonGroup();
         jLabel2 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -155,6 +159,7 @@ public checkin_Model getData() {
         RadioButtonM = new javax.swing.JRadioButton();
         RadioButtonF = new javax.swing.JRadioButton();
         RadioButtonO = new javax.swing.JRadioButton();
+        combo_pack = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -162,31 +167,35 @@ public checkin_Model getData() {
 
         jLabel2.setFont(new java.awt.Font("Segoe Script", 0, 14)); // NOI18N
         jLabel2.setText("Customer-ID");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 190, -1));
+
+        jLabel13.setFont(new java.awt.Font("Segoe Script", 0, 14)); // NOI18N
+        jLabel13.setText("Package");
+        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 190, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe Script", 0, 14)); // NOI18N
         jLabel3.setText("Gender");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 200, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe Script", 0, 14)); // NOI18N
         jLabel4.setText("Name");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 200, -1));
 
         jLabel5.setFont(new java.awt.Font("Segoe Script", 0, 14)); // NOI18N
         jLabel5.setText("Duration");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, 190, -1));
 
         jLabel6.setFont(new java.awt.Font("Segoe Script", 0, 14)); // NOI18N
         jLabel6.setText("Amount Paid");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 410, -1, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 440, 190, -1));
 
         jLabel7.setFont(new java.awt.Font("Segoe Script", 0, 14)); // NOI18N
         jLabel7.setText("Pending Amount");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 450, -1, -1));
-        getContentPane().add(txt_Phonenumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 170, 242, -1));
-        getContentPane().add(txt_ChInDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 330, 242, -1));
-        getContentPane().add(txt_Duration, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 370, 242, -1));
-        getContentPane().add(txt_amtPaid, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 410, 242, -1));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 480, 190, -1));
+        getContentPane().add(txt_Phonenumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 180, 242, -1));
+        getContentPane().add(txt_ChInDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 360, 242, -1));
+        getContentPane().add(txt_Duration, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 400, 242, -1));
+        getContentPane().add(txt_amtPaid, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 440, 242, -1));
 
         btn_submit.setBackground(new java.awt.Color(0, 0, 0));
         btn_submit.setFont(new java.awt.Font("Segoe Script", 0, 12)); // NOI18N
@@ -197,7 +206,7 @@ public checkin_Model getData() {
                 btn_submitActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_submit, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 480, 120, -1));
+        getContentPane().add(btn_submit, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 520, 130, -1));
 
         btn_calcDue.setBackground(new java.awt.Color(0, 0, 0));
         btn_calcDue.setFont(new java.awt.Font("Segoe Script", 0, 12)); // NOI18N
@@ -208,7 +217,7 @@ public checkin_Model getData() {
                 btn_calcDueActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_calcDue, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 480, 140, -1));
+        getContentPane().add(btn_calcDue, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 520, 170, -1));
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/imagess/Check-in.jpg"))); // NOI18N
 
@@ -217,8 +226,8 @@ public checkin_Model getData() {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 454, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -231,15 +240,15 @@ public checkin_Model getData() {
 
         jLabel9.setFont(new java.awt.Font("Segoe Script", 0, 14)); // NOI18N
         jLabel9.setText("Phone Number");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, -1, -1));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 200, -1));
 
         jLabel10.setFont(new java.awt.Font("Segoe Script", 0, 14)); // NOI18N
         jLabel10.setText("Room Type");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, -1, -1));
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 190, -1));
 
         jLabel11.setFont(new java.awt.Font("Segoe Script", 0, 14)); // NOI18N
         jLabel11.setText("Room Number");
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, -1, -1));
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 190, -1));
 
         commbo_rType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Single", "Double", "Suite", "Deluxe" }));
         commbo_rType.addActionListener(new java.awt.event.ActionListener() {
@@ -247,36 +256,36 @@ public checkin_Model getData() {
                 commbo_rTypeActionPerformed(evt);
             }
         });
-        getContentPane().add(commbo_rType, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 250, 242, -1));
+        getContentPane().add(commbo_rType, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 240, 242, -1));
 
         combo_rNumber.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 combo_rNumberActionPerformed(evt);
             }
         });
-        getContentPane().add(combo_rNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 290, 242, -1));
+        getContentPane().add(combo_rNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 320, 242, -1));
 
         txt_amtDue.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_amtDueActionPerformed(evt);
             }
         });
-        getContentPane().add(txt_amtDue, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 450, 242, -1));
+        getContentPane().add(txt_amtDue, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 480, 242, -1));
 
         jLabel12.setFont(new java.awt.Font("Segoe Script", 0, 14)); // NOI18N
         jLabel12.setText("Check-in Date");
-        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, -1, -1));
+        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, 190, -1));
 
         txt_cID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_cIDActionPerformed(evt);
             }
         });
-        getContentPane().add(txt_cID, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 90, 242, -1));
-        getContentPane().add(txt_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, 242, -1));
+        getContentPane().add(txt_cID, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 100, 242, -1));
+        getContentPane().add(txt_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 140, 242, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/imagess/cloudbeds-2-removebg-previewww.png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 440, 80));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 420, 100));
 
         jButton4.setBackground(new java.awt.Color(0, 0, 0));
         jButton4.setFont(new java.awt.Font("Segoe Script", 0, 12)); // NOI18N
@@ -287,7 +296,7 @@ public checkin_Model getData() {
                 jButton4ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 480, 110, -1));
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 520, 150, -1));
 
         btngroup.add(RadioButtonM);
         RadioButtonM.setText("Male");
@@ -295,11 +304,14 @@ public checkin_Model getData() {
 
         btngroup.add(RadioButtonF);
         RadioButtonF.setText("Female");
-        getContentPane().add(RadioButtonF, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 210, -1, -1));
+        getContentPane().add(RadioButtonF, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 210, -1, -1));
 
         btngroup.add(RadioButtonO);
         RadioButtonO.setText("Others");
-        getContentPane().add(RadioButtonO, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 210, -1, -1));
+        getContentPane().add(RadioButtonO, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 210, -1, -1));
+
+        combo_pack.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Package", "Non-Package" }));
+        getContentPane().add(combo_pack, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 280, 240, -1));
 
         pack();
         setLocationRelativeTo(null);
@@ -379,6 +391,7 @@ public checkin_Model getData() {
     private javax.swing.JButton btn_calcDue;
     private javax.swing.JButton btn_submit;
     private javax.swing.ButtonGroup btngroup;
+    private javax.swing.JComboBox<String> combo_pack;
     private javax.swing.JComboBox<String> combo_rNumber;
     private javax.swing.JComboBox<String> commbo_rType;
     private javax.swing.JButton jButton4;
@@ -386,6 +399,7 @@ public checkin_Model getData() {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

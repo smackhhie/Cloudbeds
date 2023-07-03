@@ -6,7 +6,7 @@ package Model;
 
 public class roomAva_Model {
     String availability,status;
-    int room_no, rate;
+    int room_no, rate,package_rate;
 
 
     public String getAvailability() {
@@ -40,10 +40,17 @@ public class roomAva_Model {
     public void setRate(int rate) {
         this.rate = rate;
     }
-    public roomAva_Model(String availability , String status , int room_no , int rate) {
+    public int getPackage_Rate() {
+        return package_rate;
+    }
+    public void setPackage_Rate(int package_rate) {
+        this.package_rate = package_rate;
+    }
+    public roomAva_Model(String availability , String status , int room_no , int rate,int package_rate) {
         this.availability=availability;
         this.status=status;
         this.room_no=room_no;
         this.rate=rate;
+        this.package_rate=package_rate;
     }  
 }
