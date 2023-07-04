@@ -3,62 +3,66 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package View;
-import javax.swing.JFrame;
-import javax.swing.JTable;
+
+//import javax.swing.JFrame;
+//import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import java.awt.Dimension;
 import Model.roomAva_Model;
 import Controller.roomAva_Controller;
 import java.awt.event.ActionListener;
-import javax.swing.JComboBox;
-import javax.swing.JTextField;
-
+//import javax.swing.JComboBox;
+//import javax.swing.JTextField;
+import javax.swing.JOptionPane;
 
 public class roomAva_View extends javax.swing.JFrame {
-    private DefaultTableModel tableModel;
-    
+
+    //private DefaultTableModel tableModel;
+
     private roomAva_Controller controller;
-    
-    DefaultTableModel dtm=null;
-    
+
+    DefaultTableModel dtm = null;
+
     public int getSelectedRoomNumber() {
-    String roomNumberStr = (String) comboRoom_No.getSelectedItem();
-    return Integer.parseInt(roomNumberStr);
+        String roomNumberStr = (String) comboRoom_No.getSelectedItem();
+        return Integer.parseInt(roomNumberStr);
     }
-    
+
     public DefaultTableModel getTableModel() {
         return dtm;
     }
-    
-
 
     public roomAva_View() {
-    initComponents();
-    dtm = (DefaultTableModel) tableRooms.getModel();
-    tableRooms.setModel(dtm);
-    controller = new roomAva_Controller(this);
-    tableRooms.getTableHeader().setPreferredSize(new Dimension(tableRooms.getTableHeader().getPreferredSize().width, 50));
-    tableRooms.setRowHeight(50); 
+        initComponents();
+        dtm = (DefaultTableModel) tableRooms.getModel();
+        tableRooms.setModel(dtm);
+        controller = new roomAva_Controller(this);
+        tableRooms.getTableHeader().setPreferredSize(new Dimension(tableRooms.getTableHeader().getPreferredSize().width, 50));
+        tableRooms.setRowHeight(50);
     }
-    
+
     roomAva_Model model;
-    public roomAva_Model getData(){   
-    int room_no = Integer.parseInt((String) comboRoom_No.getSelectedItem());
-    int rate = Integer.parseInt((String) txt_rate.getText());
-    String status = (String) combo_Status.getSelectedItem();
-    String availability= (String) comboAvailability.getSelectedItem();
-    int package_rate = Integer.parseInt((String) txt_prate.getText());
-    model = new roomAva_Model(availability, status, room_no, rate, package_rate);
-    return model;
-    }
-    
-    public void updateRoom (ActionListener log)
-    {
-      btn_Update.addActionListener(log);
+
+    public roomAva_Model getData() {
+        int room_no = Integer.parseInt((String) comboRoom_No.getSelectedItem());
+        int rate = Integer.parseInt((String) txt_rate.getText());
+        String status = (String) combo_Status.getSelectedItem();
+        String availability = (String) comboAvailability.getSelectedItem();
+        int package_rate = Integer.parseInt((String) txt_prate.getText());
+        model = new roomAva_Model(availability, status, room_no, rate, package_rate);
+        return model;
     }
 
+    public void updateRoom(ActionListener log) {
+        btn_Update.addActionListener(log);
+    }
 
-    
+    public void showMessage(String msg) {
+        {
+            JOptionPane.showMessageDialog(this, msg);
+        }
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -325,9 +329,9 @@ public class roomAva_View extends javax.swing.JFrame {
 
     private void btn_ShowRoomsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ShowRoomsActionPerformed
         // TODO add your handling code here:
-    controller.populateTableFromDatabase();
-    controller.populateRoomNumbers(comboRoom_No);
-    
+        controller.populateTableFromDatabase();
+        controller.populateRoomNumbers(comboRoom_No);
+
     }//GEN-LAST:event_btn_ShowRoomsActionPerformed
 
     private void txt_rateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_rateActionPerformed
@@ -337,14 +341,13 @@ public class roomAva_View extends javax.swing.JFrame {
     private void comboRoom_NoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboRoom_NoActionPerformed
         // TODO add your handling code here:
         controller.refreshRates(getSelectedRoomNumber(), txt_rate);
-        controller.refreshPackageRates(getSelectedRoomNumber(),txt_prate);
+        controller.refreshPackageRates(getSelectedRoomNumber(), txt_prate);
         controller.updateStatus(getSelectedRoomNumber(), combo_Status);
         controller.updateAvailabilityStatus(getSelectedRoomNumber(), comboAvailability);
     }//GEN-LAST:event_comboRoom_NoActionPerformed
 
     private void btn_UpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_UpdateActionPerformed
         // TODO add your handling code here:
-        controller.updateRoomDetails(model);
     }//GEN-LAST:event_btn_UpdateActionPerformed
 
     private void txt_prateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_prateActionPerformed

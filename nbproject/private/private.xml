@@ -4,18 +4,14 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Anup/Documents/NetBeansProjects/CloudBeds/src/Controller/checkin_Controller.java</file>
+            <file>file:/C:/Users/Anup/Documents/NetBeansProjects/CloudBeds/src/Model/roomAva_Model.java</file>
+            <file>file:/C:/Users/Anup/Documents/NetBeansProjects/CloudBeds/src/View/cDetails_View.java</file>
+            <file>file:/C:/Users/Anup/Documents/NetBeansProjects/CloudBeds/src/Controller/roomAva_Controller.java</file>
             <file>file:/C:/Users/Anup/Documents/NetBeansProjects/CloudBeds/src/View/roomAva_View.java</file>
             <file>file:/C:/Users/Anup/Documents/NetBeansProjects/CloudBeds/src/View/Check_in_out.java</file>
-            <file>file:/C:/Users/Anup/Documents/NetBeansProjects/CloudBeds/src/View/update_emp_info.java</file>
-            <file>file:/C:/Users/Anup/Documents/NetBeansProjects/CloudBeds/src/View/Add_room.java</file>
-            <file>file:/C:/Users/Anup/Documents/NetBeansProjects/CloudBeds/src/View/Add_emp.java</file>
-            <file>file:/C:/Users/Anup/Documents/NetBeansProjects/CloudBeds/src/View/register.java</file>
-            <file>file:/C:/Users/Anup/Documents/NetBeansProjects/CloudBeds/src/View/Add_empmodel.java</file>
-            <file>file:/C:/Users/Anup/Documents/NetBeansProjects/CloudBeds/src/View/login.java</file>
-            <file>file:/C:/Users/Anup/Documents/NetBeansProjects/CloudBeds/src/Model/roomAva_Model.java</file>
-            <file>file:/C:/Users/Anup/Documents/NetBeansProjects/CloudBeds/src/Controller/roomAva_Controller.java</file>
             <file>file:/C:/Users/Anup/Documents/NetBeansProjects/CloudBeds/src/Model/checkin_Model.java</file>
-            <file>file:/C:/Users/Anup/Documents/NetBeansProjects/CloudBeds/src/View/Cus_info.java</file>
+            <file>file:/C:/Users/Anup/Documents/NetBeansProjects/CloudBeds/src/View/packages_View.java</file>
+            <file>file:/C:/Users/Anup/Documents/NetBeansProjects/CloudBeds/src/Model/add_emp_Model.java</file>
         </group>
     </open-files>
 </project-private>
