@@ -283,6 +283,7 @@ public class roomAva_Controller {
         pst.setInt(2, room.getRate());
         pst.setString(4, room.getAvailability());
         pst.setInt(3, room.getPackage_Rate());
+        pst.setInt(5, view.getSelectedRoomNumber());
         System.out.println("Data Updated");
         JOptionPane.showMessageDialog(null, "Updated successfully");
         int rowsAffected = pst.executeUpdate();
