@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.table.DefaultTableModel;
+import java.sql.*;
 
 
 /**
@@ -24,6 +25,52 @@ public class PlaceOrder extends javax.swing.JFrame {
     public PlaceOrder() {
         initComponents();
     }
+
+//public class FetchDataExample {
+//    public static void main(String[] args) {
+//        try {
+//            // Establish the database connection
+//            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotel_management_system", "username", "password");
+//
+//            // Assuming you have a table named 'maincourse' with 'food' and 'price' columns
+//            DefaultTableModel dtm = (DefaultTableModel) Table1.getModel();
+//            int selectedRow = Table1.getSelectedRow();
+//            if (selectedRow != -1) {
+//                String selectedFood = dtm.getValueAt(selectedRow, 0).toString();
+//
+//                // Create a query to fetch the price of the selected food
+//                String query = "SELECT price FROM maincourse WHERE food = ?";
+//                PreparedStatement preparedStatement = connection.prepareStatement(query);
+//                preparedStatement.setString(1, selectedFood);
+//
+//                // Execute the query
+//                ResultSet resultSet = preparedStatement.executeQuery();
+//
+//                if (resultSet.next()) {
+//                    float price = resultSet.getFloat("price");
+//                    // Assuming you have text fields named 'txtfood' and 'txtprice'
+//                    txtfood.setText(selectedFood);
+//                    txtprice.setText(String.valueOf(price));
+//                } else {
+//                    // Handle the case where the selected food item is not found
+//                    JOptionPane.showMessageDialog(null, "Selected food item not found.");
+//                }
+//
+//                // Close the result set, prepared statement, and connection
+//                resultSet.close();
+//                preparedStatement.close();
+//            } else {
+//                // Handle the case where no row is selected in the table
+//                JOptionPane.showMessageDialog(null, "No row selected in the table.");
+//            }
+//
+//            // Close the connection
+//            connection.close();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//    }
+//}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -50,18 +97,20 @@ public class PlaceOrder extends javax.swing.JFrame {
         txtfood = new javax.swing.JTextField();
         txtprice = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jSpinner1 = new javax.swing.JSpinner();
+        txtquantity = new javax.swing.JSpinner();
         jLabel11 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        txttotal = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
-        jLabel12 = new javax.swing.JLabel();
+        txt_total = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        Table2 = new javax.swing.JTable();
+        jLabel12 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         jLabel15 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -106,14 +155,14 @@ public class PlaceOrder extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel6.setText("Category");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 160, -1, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 110, -1, -1));
 
         Table1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Name"
+                "Name", "Price"
             }
         ));
         Table1.addAncestorListener(new javax.swing.event.AncestorListener() {
@@ -132,36 +181,36 @@ public class PlaceOrder extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(Table1);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 270, 297, 310));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 260, 297, 240));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel8.setText("Name");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(887, 117, -1, -1));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 110, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel9.setText("Price");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(1207, 117, -1, -1));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 100, -1, -1));
 
         txtfood.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtfoodActionPerformed(evt);
             }
         });
-        getContentPane().add(txtfood, new org.netbeans.lib.awtextra.AbsoluteConstraints(887, 151, 150, -1));
-        getContentPane().add(txtprice, new org.netbeans.lib.awtextra.AbsoluteConstraints(1207, 151, 150, -1));
+        getContentPane().add(txtfood, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 150, 150, -1));
+        getContentPane().add(txtprice, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 150, 150, -1));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel10.setText("Quantity");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(887, 216, -1, -1));
-        getContentPane().add(jSpinner1, new org.netbeans.lib.awtextra.AbsoluteConstraints(887, 250, 150, -1));
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 210, -1, -1));
+        getContentPane().add(txtquantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 250, 150, -1));
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel11.setText("Total");
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(1207, 216, -1, -1));
-        getContentPane().add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1207, 250, 150, -1));
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 210, -1, -1));
+        getContentPane().add(txttotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 250, 150, -1));
 
         jButton2.setText("Clear");
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(887, 313, -1, -1));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 310, -1, -1));
 
         jButton3.setText("Add to Cart");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -169,26 +218,31 @@ public class PlaceOrder extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1207, 321, -1, -1));
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 310, -1, -1));
 
-        jTable2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        txt_total.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_totalActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txt_total, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 650, -1, -1));
+        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 650, 50, 20));
+
+        Table2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Table2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null}
+
             },
             new String [] {
                 "Name", "Price", "Quantity", "Total"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(Table2);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(742, 362, 465, 345));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 370, 465, 250));
 
         jLabel12.setText("Grand Total : Rs. ");
-        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(742, 737, -1, -1));
-
-        jLabel13.setText("0000");
-        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(848, 737, -1, -1));
+        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 650, -1, -1));
 
         jButton5.setText("Desert");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -196,7 +250,7 @@ public class PlaceOrder extends javax.swing.JFrame {
                 jButton5ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 200, -1, -1));
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 200, -1, -1));
 
         jButton6.setText("Main Course");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -204,7 +258,7 @@ public class PlaceOrder extends javax.swing.JFrame {
                 jButton6ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 200, -1, -1));
+        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 150, -1, -1));
 
         jButton7.setText("Drinks");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
@@ -212,7 +266,15 @@ public class PlaceOrder extends javax.swing.JFrame {
                 jButton7ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 200, -1, -1));
+        getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 200, -1, -1));
+
+        jButton4.setText("Generate Bill & Print");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 640, -1, -1));
 
         jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/whitebbgg.jpg"))); // NOI18N
         getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 800));
@@ -221,15 +283,29 @@ public class PlaceOrder extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+        setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
-
+    private int rowCount = 0;
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+                        DefaultTableModel dtm = (DefaultTableModel) Table2.getModel();
+                    dtm.setRowCount(0);
+                String food = txtfood.getText();
+                String pric = txtprice.getText();
+                Object quantity=txtquantity.getValue();
+                
+                double p=Double.parseDouble((pric));
+                double q=Double.parseDouble(quantity.toString());    
+                double totalll=p*q;
+                
+                String total = Double.toString(totalll);
+
+                Object[] row = {food, pric,quantity,total};
+                dtm.addRow(row);
+                 rowCount++;
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void Table1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_Table1AncestorAdded
@@ -267,7 +343,7 @@ public class PlaceOrder extends javax.swing.JFrame {
         catch(Exception e){
             e.printStackTrace();
         }
-
+        
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -318,6 +394,15 @@ public class PlaceOrder extends javax.swing.JFrame {
     private void txtfoodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfoodActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtfoodActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void txt_totalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_totalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_totalActionPerformed
                              
 
     /**
@@ -357,9 +442,11 @@ public class PlaceOrder extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable Table1;
+    private javax.swing.JTable Table2;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
@@ -378,12 +465,12 @@ public class PlaceOrder extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField txt_total;
     private javax.swing.JTextField txtfood;
     private javax.swing.JTextField txtprice;
+    private javax.swing.JSpinner txtquantity;
+    private javax.swing.JTextField txttotal;
     // End of variables declaration//GEN-END:variables
 }
