@@ -5,7 +5,39 @@
 package model;
 
 public class Add_empmodel {
-    String fname,select,Sal,Phone,Citizen;
+    String fname,selectedValue,select,Sal,Phone,Citizen,male,female,other;
+
+    public String getSelectedValue() {
+        return selectedValue;
+    }
+
+    public void setSelectedValue(String selectedValue) {
+        this.selectedValue = selectedValue;
+    }
+
+    public String getMale() {
+        return male;
+    }
+
+    public void setMale(String male) {
+        this.male = male;
+    }
+
+    public String getFemale() {
+        return female;
+    }
+
+    public void setFemale(String female) {
+        this.female = female;
+    }
+
+    public String getOther() {
+        return other;
+    }
+
+    public void setOther(String other) {
+        this.other = other;
+    }
 
     public String getFname() {
         return fname;
@@ -46,12 +78,16 @@ public class Add_empmodel {
     public void setCitizen(String Citizen) {
         this.Citizen = Citizen;
     }
-    public Add_empmodel(String fname,String select,String Sal,String Phone,String Citizen){
+    public Add_empmodel(String fname, String select, String Sal, String Phone, String Citizen, String male, String female, String other, String SelectedValue){
         this.fname=fname;
         this.select=select;
         this.Sal=Sal;
         this.Phone=Phone;
         this.Citizen=Citizen;
+        this.selectedValue=selectedValue;
+        this.male=male;
+        this.female=female;
+        this.other=other;
     }
     
 }

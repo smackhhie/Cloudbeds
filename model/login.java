@@ -8,10 +8,14 @@ import javax.swing.JOptionPane;
 
 
 public class login extends javax.swing.JFrame {
-
+    loginmodel model;
     public login() {
         initComponents();
     }
+       public loginmodel getUser(){
+       model = new loginmodel(txtusername.getText(),txtpassword.getText());
+       return model;
+   }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

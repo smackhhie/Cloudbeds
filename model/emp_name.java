@@ -4,6 +4,7 @@
  */
 package model;
 
+import view.emp_info;
 import database.FRONT;
 import java.sql.Connection;
 import java.sql.ResultSet;

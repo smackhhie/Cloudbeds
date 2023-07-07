@@ -4,6 +4,8 @@
  */
 package model;
 
+import view.Add_emp;
+
 /**
  *
  * @author rujan

@@ -16,7 +16,7 @@ public class update_emp_info extends javax.swing.JFrame {
     }
 
    public Add_empmodel getUser(){
-       model = new Add_empmodel(txtname.getText(),(String) txtselect.getSelectedItem(),salary.getText(),phone.getText(),citizenno.getText());
+       model = new Add_empmodel(txtname.getText(),(String) txtselect.getSelectedItem(),salary.getText(),phone.getText(),citizenno.getText(), btnmale.getText(), btnfemale.getText(), btnothers.getText(), btnothers.getText());
        return model;
    }
 //   public Add_empListenter(ActionListener dashboard){
