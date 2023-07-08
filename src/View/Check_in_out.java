@@ -1,88 +1,177 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package View;
+
 import Model.checkin_Model;
 import java.text.SimpleDateFormat;
-import java.awt.event.ActionListener;
 import java.util.Calendar;
 import Controller.checkin_Controller;
 import javax.swing.JComboBox;
 import java.sql.Date;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
+
+import static Model.checkin_Model.amountPaidvalid;
+import static Model.checkin_Model.amtremainingV;
+import static Model.checkin_Model.amtremainingValid;
+import static Model.checkin_Model.cIDvalid;
+import static Model.checkin_Model.durationvalid;
+import static Model.checkin_Model.durationzero;
+import static Model.checkin_Model.fullname;
+import static Model.checkin_Model.gender;
+import static Model.checkin_Model.phnumberlengthvalidation;
+import static Model.checkin_Model.roomPackage;
+import static Model.checkin_Model.roomType;
+import static Model.checkin_Model.roomnumbervalid;
 
 public class Check_in_out extends javax.swing.JFrame {
-  
-    
-    public JComboBox<String> getCombo_rNumber() {
+
+    public JComboBox<String> get_rNumber() {
         return combo_rNumber;
     }
+
+    public int getCombo_rNumber() {
+        String roomNumberStr = (String) combo_rNumber.getSelectedItem();
+        return Integer.parseInt(roomNumberStr);
+    }
+
+//    public String getstrRoomrate() {
+//        return combo_rNumber;
+//    }
+
     public String getpackageStatus() {
-    return combo_pack.getSelectedItem().toString();
-}
+        return combo_pack.getSelectedItem().toString();
+    }
+
     public JComboBox<String> getCombo_rType() {
         return commbo_rType;
-        
+
     }
-        public ButtonGroup getButtonGroupGender() {
+
+    public ButtonGroup getButtonGroupGender() {
         return btngroup;
     }
     private checkin_Controller controller;
-    
 
+    public String selectedroomType() {
+        return commbo_rType.getSelectedItem().toString();
+    }
 
     public JTextField getTxt_amtPaid() {
         return txt_amtPaid;
     }
+
     public JTextField getTxt_amtDue() {
         return txt_amtDue;
     }
+
     public JTextField getTxt_name() {
         return txt_name;
     }
+
     public JTextField getTxt_Phonenumber() {
         return txt_Phonenumber;
     }
-  
-    
+
     public JTextField getTxt_Duration() {
         return txt_Duration;
     }
-        public JTextField getTxt_cID() {
+
+    public JTextField getTxt_cID() {
         return txt_cID;
     }
-        public int getSelectedRoomNumber() {
-    String roomNumberStr = (String) combo_rNumber.getSelectedItem();
-    return Integer.parseInt(roomNumberStr);
-}   
-        public int getPhNumber() {
-    String PhnumberStr = (String) txt_Phonenumber.getText();
-    return Integer.parseInt(PhnumberStr);
-}
- 
-        
+
+    public int getSelectedRoomNumber() {
+        String roomNumberStr = (String) combo_rNumber.getSelectedItem();
+        return Integer.parseInt(roomNumberStr);
+    }
+
+    public int getPhNumber() {
+        String PhnumberStr = (String) txt_Phonenumber.getText();
+        return Integer.parseInt(PhnumberStr);
+    }
+
+    public int getDurInt() {
+        String duraStr = (String) txt_Duration.getText();
+        return Integer.parseInt(duraStr);
+    }
+
+    public int amtPInt() {
+        String amtPStr = (String) txt_amtPaid.getText();
+        return Integer.parseInt(amtPStr);
+    }
+
+    public int amtDInt() {
+        String amtDStr = (String) txt_amtDue.getText();
+        return Integer.parseInt(amtDStr);
+    }
+
     public Check_in_out() {
         initComponents();
         txt_ChInDate.setEditable(false);
-        SimpleDateFormat myFormat=new SimpleDateFormat("yyyy-MM-dd");
-        Calendar cal= Calendar.getInstance();
+        SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar cal = Calendar.getInstance();
         txt_ChInDate.setText(myFormat.format(cal.getTime()));
         controller = new checkin_Controller(this);
         txt_ChInDate.setText(myFormat.format(cal.getTime()));
     }
 
-checkin_Model mymodel;
+    public checkin_Model getData() {
 
-public checkin_Model getData() {
-    String fullName = txt_name.getText();
-    String phoneNumber = txt_Phonenumber.getText();
-    int amountPaid = Integer.parseInt(txt_amtPaid.getText());
-    int duration = Integer.parseInt(txt_Duration.getText());
-    String room_package=getpackageStatus();
+        String fullName = txt_name.getText();
+        String phoneNumber = txt_Phonenumber.getText();
+        int amountPaid = Integer.parseInt(txt_amtPaid.getText());
+        int duration = Integer.parseInt(txt_Duration.getText());
+        String room_package = getpackageStatus().equals("Package") ? "Yes" : "No";
+        String gender = "";
+        if (RadioButtonM.isSelected()) {
+            gender = "Male";
+        } else if (RadioButtonF.isSelected()) {
+            gender = "Female";
+        } else if (RadioButtonO.isSelected()) {
+            gender = "Other";
+        }
+
+        String roomType = (String) commbo_rType.getSelectedItem();
+        int roomNumber = Integer.parseInt((String) combo_rNumber.getSelectedItem());
+        Date checkinDate = Date.valueOf(txt_ChInDate.getText());
+
+        int customerId = Integer.parseInt(txt_cID.getText());
+
+        int amountRemaining = Integer.parseInt(txt_amtDue.getText());
+
+        checkin_Model mymodel = new checkin_Model(fullName, room_package, phoneNumber, amountPaid, duration, gender, roomType, roomNumber, checkinDate, customerId, amountRemaining);
+        return mymodel;
+    }
+//  public void addCheckin(ActionListener log)
+//  {
+//      btn_submit.addActionListener(log);
+//  }
+
+    public void showMessage(String msg) {
+        {
+            JOptionPane.showMessageDialog(this, msg);
+        }
+    }
+//  public void calcDue(ActionListener log)
+//  {
+//      btn_calcDue.addActionListener(log);
+//  }
+
+    public void showMessage1(String msg) {
+        {
+            JOptionPane.showMessageDialog(this, msg);
+        }
+    }
+
+  public boolean isvalid() {
+    String fullname = txt_name.getText();
+    String amtremain = txt_amtDue.getText();
+    String ph = txt_Phonenumber.getText();
+    String CID = txt_cID.getText();
+    String duration = txt_Duration.getText();
+    String amtPaid = txt_amtPaid.getText();
     String gender = "";
+    
     if (RadioButtonM.isSelected()) {
         gender = "Male";
     } else if (RadioButtonF.isSelected()) {
@@ -91,40 +180,97 @@ public checkin_Model getData() {
         gender = "Other";
     }
     
-    String roomType = (String) commbo_rType.getSelectedItem();
-    int roomNumber = Integer.parseInt((String) combo_rNumber.getSelectedItem());
-    Date checkinDate = Date.valueOf(txt_ChInDate.getText()); 
-
-    // Get the customer ID
-    int customerId = Integer.parseInt(txt_cID.getText());
-
-    // Get the amount remaining
-    int amountRemaining = Integer.parseInt(txt_amtDue.getText());
-
-    mymodel = new checkin_Model(fullName, room_package ,phoneNumber, amountPaid, duration, gender, roomType, roomNumber, checkinDate, customerId, amountRemaining);
-    return mymodel;
-}
-  public void addCheckin(ActionListener log)
-  {
-      btn_submit.addActionListener(log);
-  }
-  public void showMessage(String msg){
-      {
-          JOptionPane.showMessageDialog(this, msg);
-      }
-  }
-  public void calcDue(ActionListener log)
-  {
-      btn_calcDue.addActionListener(log);
-  }
-  public void showMessage1(String msg){
-      {
-          JOptionPane.showMessageDialog(this, msg);
-      }
-  }
-
+    String roomT = selectedroomType();
+    String roomN = get_rNumber().toString();
+    String roomP = getpackageStatus();
     
- 
+    if (fullname.isEmpty() || amtremain.isEmpty() || ph.isEmpty() || CID.isEmpty() || duration.isEmpty() || amtPaid.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "One or more fields are empty");
+        return false;
+    }
+    
+    if (!fullname(fullname)) {
+        JOptionPane.showMessageDialog(this, "Please enter a valid full name");
+        return false;
+    }
+    
+    if (!phnumberlengthvalidation(ph)) {
+        JOptionPane.showMessageDialog(this, "Please enter a valid phone number");
+        return false;
+    }
+    
+    if (!gender(gender)) {
+        JOptionPane.showMessageDialog(this, "Please select a gender");
+        return false;
+    }
+    
+    if (!roomType(roomT)) {
+        JOptionPane.showMessageDialog(this, "Please select a room type");
+        return false;
+    }
+    
+    if (!roomPackage(roomP)) {
+        JOptionPane.showMessageDialog(this, "Please select a room package");
+        return false;
+    }
+    
+    if (!roomnumbervalid(roomN)) {
+        JOptionPane.showMessageDialog(this, "Room number not selected or no available rooms");
+        return false;
+    }
+    
+    if (!durationvalid(duration)) {
+        JOptionPane.showMessageDialog(this, "Please enter a valid duration");
+        return false;
+    }
+    
+    int durationInt;
+    int amtRInt;
+    try {
+        durationInt = Integer.parseInt(duration);
+        amtRInt = Integer.parseInt(amtremain);
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Invalid number format");
+        return false;
+    }
+    
+    if (!durationzero(durationInt)) {
+        JOptionPane.showMessageDialog(this, "Duration can't be 0");
+        return false;
+    }
+    
+    if (!amountPaidvalid(amtPaid)) {
+        JOptionPane.showMessageDialog(this, "Please enter a valid amount paid");
+        return false;
+    }
+    
+    if (!amtremainingValid(amtremain)) {
+        JOptionPane.showMessageDialog(this, "Please calculate the amount due");
+        return false;
+    }
+    
+    if (!cIDvalid(CID)) {
+        JOptionPane.showMessageDialog(this, "Please enter a valid Customer ID");
+        return false;
+    }
+    
+    if (amtremainingV(amtRInt)) {
+        JOptionPane.showMessageDialog(this, "Amount paid exceeds the charged amount");
+        return false;
+    }
+
+    return true;
+}
+    public void clearTextFields() {
+        getTxt_name().setText("");
+        getTxt_Phonenumber().setText("");
+        getTxt_amtPaid().setText("");
+        getTxt_Duration().setText("");
+        getTxt_amtDue().setText("");
+        get_rNumber().setSelectedIndex(-1);
+        getCombo_rType().setSelectedIndex(-1);
+        getButtonGroupGender().clearSelection();
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -327,7 +473,7 @@ public checkin_Model getData() {
     }//GEN-LAST:event_txt_cIDActionPerformed
 
     private void btn_submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_submitActionPerformed
-
+        controller.submit();
     }//GEN-LAST:event_btn_submitActionPerformed
 
     private void combo_rNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_rNumberActionPerformed
@@ -336,17 +482,17 @@ public checkin_Model getData() {
 
     private void commbo_rTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_commbo_rTypeActionPerformed
         // TODO add your handling code here:
-        String selectedRoomType = (String) commbo_rType.getSelectedItem();
-        controller.refreshRoomNumbers(selectedRoomType, combo_rNumber);
+
+        controller.refreshRoomNumberss(selectedroomType(), combo_rNumber);
     }//GEN-LAST:event_commbo_rTypeActionPerformed
 
     private void btn_calcDueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_calcDueActionPerformed
-
+        getTxt_amtDue().setText(String.valueOf(controller.calculateAmountDue()));
     }//GEN-LAST:event_btn_calcDueActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-       
+
     }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
