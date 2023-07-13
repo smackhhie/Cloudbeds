@@ -53,9 +53,9 @@ public class roomAva_View extends javax.swing.JFrame {
         return model;
     }
 
-    public void updateRoom(ActionListener log) {
-        btn_Update.addActionListener(log);
-    }
+//    public void updateRoom(ActionListener log) {
+//        btn_Update.addActionListener(log);
+//    }
 
     public void showMessage(String msg) {
         {
@@ -330,7 +330,7 @@ public class roomAva_View extends javax.swing.JFrame {
     private void btn_ShowRoomsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ShowRoomsActionPerformed
         // TODO add your handling code here:
         controller.populateTableFromDatabase();
-        controller.populateRoomNumbers(comboRoom_No);
+        controller.PopulateRoomNumberss(comboRoom_No);
 
     }//GEN-LAST:event_btn_ShowRoomsActionPerformed
 
@@ -348,6 +348,7 @@ public class roomAva_View extends javax.swing.JFrame {
 
     private void btn_UpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_UpdateActionPerformed
         // TODO add your handling code here:
+        controller.update();
     }//GEN-LAST:event_btn_UpdateActionPerformed
 
     private void txt_prateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_prateActionPerformed

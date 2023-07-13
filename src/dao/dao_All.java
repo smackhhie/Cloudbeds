@@ -58,7 +58,7 @@ public class dao_All {
             }
         } else {
             try {
-                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cloudbeds", "root", "15anup#$");
+             
                 String query = "SELECT room_rate FROM rooms WHERE roomNo = ?";
                 pst = conn.prepareStatement(query);
                 pst.setInt(1, roomNumber);
@@ -90,8 +90,6 @@ public class dao_All {
     public List<Integer> refreshRoomNumbers(String roomType) {
         List<Integer> roomNumbers = new ArrayList<>();
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cloudbeds", "root", "15anup#$");
 
             String query = "SELECT roomNo FROM rooms WHERE room_type = '" + roomType
                     + "' AND room_status = 'clean' AND room_availability = 'available'";
