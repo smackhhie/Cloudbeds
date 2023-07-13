@@ -84,19 +84,9 @@ public class Add_empController {
         else{
              model=view.getUser();
             try {
-                if(DaO.checkUser(model))
-                {
-                    JOptionPane.showMessageDialog(null,"Sucessfully Added");
-
-                }
-                else
-                {
-                    JOptionPane.showMessageDialog(null,"Error");
-                    
-                    
-                }
-   
-//      JOptionPane.showMessageDialog(null,"Sucessfully Added");
+                DaO.checkUser(model);
+             JOptionPane.showMessageDialog(null,"Sucessfully Added");
+             new dashboard().setVisible(true);
             } catch (Exception ex) {
                 Logger.getLogger(Add_empController.class.getName()).log(Level.SEVERE, null, ex);
             }
