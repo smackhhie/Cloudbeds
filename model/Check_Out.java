@@ -12,7 +12,7 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 import model.dashboard;
 import model.login;
-import model.register;
+import view.register;
 
 
 

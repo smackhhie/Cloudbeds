@@ -1,6 +1,7 @@
 
 package model;
 
+import view.register;
 import model.frontpage;
 import database.FRONT;
 import java.sql.*;
