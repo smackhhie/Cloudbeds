@@ -2,25 +2,32 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package model;
+package view;
 
+import controller.Cus_infoController;
+import view.dashboard;
 import database.FRONT;
+import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
-import java.sql.Connection;
-import java.sql.Statement;
-/**
- *
- * @author Craze
- */
-public class Cus_info extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Cus_info
-     */
+import model.Cus_infomodel;
+public class Cus_info extends javax.swing.JFrame {
+Cus_infomodel model;
     public Cus_info() {
         initComponents();
     }
-
+public Cus_infomodel getUser(){
+    String selectedValue = "";
+                if (btnmale.isSelected()) {
+                    selectedValue = btnmale.getText();
+                } else if (btnfemale.isSelected()) {
+                    selectedValue = btnfemale.getText();
+                } else if (btnOther.isSelected()) {
+                    selectedValue = btnOther.getText();
+                }
+    model=new Cus_infomodel(txt_CusName.getText(),txtcitizen.getText(),phone.getText(),btnmale.getText(),btnfemale.getText(),btnOther.getText(),selectedValue);
+    return model;
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -44,7 +51,7 @@ public class Cus_info extends javax.swing.JFrame {
         btnmale = new javax.swing.JCheckBox();
         btnfemale = new javax.swing.JCheckBox();
         btnOther = new javax.swing.JCheckBox();
-        submit = new javax.swing.JButton();
+        btnsummit = new javax.swing.JButton();
         back = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -113,16 +120,16 @@ public class Cus_info extends javax.swing.JFrame {
         btnOther.setText("Other");
         jPanel1.add(btnOther, new org.netbeans.lib.awtextra.AbsoluteConstraints(524, 258, -1, -1));
 
-        submit.setBackground(new java.awt.Color(102, 102, 255));
-        submit.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        submit.setForeground(new java.awt.Color(255, 255, 255));
-        submit.setText("Submit");
-        submit.addActionListener(new java.awt.event.ActionListener() {
+        btnsummit.setBackground(new java.awt.Color(102, 102, 255));
+        btnsummit.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnsummit.setForeground(new java.awt.Color(255, 255, 255));
+        btnsummit.setText("Submit");
+        btnsummit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                submitActionPerformed(evt);
+                btnsummitActionPerformed(evt);
             }
         });
-        jPanel1.add(submit, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 490, 82, -1));
+        jPanel1.add(btnsummit, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 490, 82, -1));
 
         back.setBackground(new java.awt.Color(102, 102, 255));
         back.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -211,39 +218,24 @@ public class Cus_info extends javax.swing.JFrame {
                 return true;
                 }
         }
-    private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
+    private void btnsummitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsummitActionPerformed
         boolean pra=validation();
         if(pra==false){
             
         }
         else{
-            Connection conn = FRONT.dbConnect();
-            try{
-                    String selectedValue = "";
-                if (btnmale.isSelected()) {
-                    selectedValue = btnmale.getText();
-                } else if (btnfemale.isSelected()) {
-                    selectedValue = btnfemale.getText();
-                } else if (btnOther.isSelected()) {
-                    selectedValue = btnOther.getText();
-                }
-                Statement stmt=conn.createStatement();
-                            String sql="insert into cusinfo values('"+txt_CusName.getText()+"','"+selectedValue+"','"+txtcitizen.getText()+"','"+phone.getText()+"')";
-                            stmt.executeUpdate(sql);
-                            System.out.println("Data inserted");
-                            JOptionPane.showMessageDialog(null,"Sucessfully Added");
-                            new Cus_info().setVisible(false);
-                    dispose();
-                    new dashboard().setVisible(true);
-            }
-            catch(Exception e){
-            e.printStackTrace();
+        Cus_infoController a=new Cus_infoController(this);
         }
-        }
-    }//GEN-LAST:event_submitActionPerformed
+    }//GEN-LAST:event_btnsummitActionPerformed
+            public void Cus_infoListner (ActionListener log)
+{
+    btnsummit.addActionListener(log);
 
+}
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
-        // TODO add your handling code here:
+                new Add_emp().setVisible(false);
+                dispose();
+                new dashboard().setVisible(true);
     }//GEN-LAST:event_backActionPerformed
        
     /**
@@ -291,12 +283,13 @@ public class Cus_info extends javax.swing.JFrame {
     private javax.swing.JCheckBox btnOther;
     private javax.swing.JCheckBox btnfemale;
     private javax.swing.JCheckBox btnmale;
+    private javax.swing.JButton btnsummit;
     private javax.swing.ButtonGroup grpbtn;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel nagarikta;
     private javax.swing.JTextField phone;
-    private javax.swing.JButton submit;
     private javax.swing.JTextField txt_CusName;
     private javax.swing.JTextField txtcitizen;
     // End of variables declaration//GEN-END:variables
+
 }
