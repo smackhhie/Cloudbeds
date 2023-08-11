@@ -23,6 +23,7 @@ public class foodm extends javax.swing.JFrame {
         initComponents();
     }
 
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -138,12 +139,18 @@ public class foodm extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setText("Desert");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 490, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 490, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setText("Price");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 80, -1, -1));
-        getContentPane().add(txtfood, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 20, 170, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 80, -1, -1));
+
+        txtfood.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtfoodActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtfood, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 30, 170, -1));
 
         txtprice3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -154,7 +161,7 @@ public class foodm extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setText("Food");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 20, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 30, -1, -1));
 
         txtdesert.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -165,14 +172,14 @@ public class foodm extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel5.setText("Price");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 550, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 550, -1, -1));
 
         txtprice.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtpriceActionPerformed(evt);
             }
         });
-        getContentPane().add(txtprice, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 80, 170, -1));
+        getContentPane().add(txtprice, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 80, 170, -1));
 
         jButton3.setText("ADD");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -332,6 +339,10 @@ public class foodm extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void txtfoodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfoodActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtfoodActionPerformed
 
     /**
      * @param args the command line arguments

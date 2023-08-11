@@ -26,10 +26,10 @@ public class Add_rooms extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        roomnum = new javax.swing.JLabel();
+        av = new javax.swing.JLabel();
+        cleanaf = new javax.swing.JLabel();
+        paisa = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         txtclean = new javax.swing.JComboBox<>();
         txtav = new javax.swing.JComboBox<>();
@@ -48,17 +48,17 @@ public class Add_rooms extends javax.swing.JFrame {
         setResizable(false);
         setSize(new java.awt.Dimension(800, 380));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel2.setText("Room Number");
+        roomnum.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        roomnum.setText("Room Number");
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel3.setText("Availability");
+        av.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        av.setText("Availability");
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel4.setText("Cleaning Status");
+        cleanaf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cleanaf.setText("Cleaning Status");
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel5.setText("Price");
+        paisa.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        paisa.setText("Price");
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel6.setText("Bed Type");
@@ -141,10 +141,10 @@ public class Add_rooms extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5)
+                                    .addComponent(av)
+                                    .addComponent(roomnum)
+                                    .addComponent(cleanaf)
+                                    .addComponent(paisa)
                                     .addComponent(jLabel6))
                                 .addGap(15, 15, 15)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -168,22 +168,22 @@ public class Add_rooms extends javax.swing.JFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
+                    .addComponent(roomnum)
                     .addComponent(txtroomnum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(28, 28, 28)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
+                            .addComponent(av)
                             .addComponent(txtav, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(30, 30, 30)
                         .addComponent(txtclean, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(91, 91, 91)
-                        .addComponent(jLabel4)))
+                        .addComponent(cleanaf)))
                 .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
+                    .addComponent(paisa)
                     .addComponent(txtprice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -202,9 +202,9 @@ public class Add_rooms extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+                                         
     // Get the values entered by the user
-            String roomNumber = jTextField1.getText();
+            String roomNumber = roomnum.getText();
             String availability = jComboBox2.getSelectedItem().toString();
             String cleaningStatus = jComboBox1.getSelectedItem().toString();
             String price = jTextField2.getText();
@@ -219,14 +219,7 @@ public class Add_rooms extends javax.swing.JFrame {
             System.out.println("Cleaning Status: " + cleaningStatus);
             System.out.println("Price: " + price);
             System.out.println("Bed Type: " + bedType);
-} 
-
-This code retrieves the values entered by the user in the text fields (jTextField1 and jTextField2) and the selected items from the combo boxes (jComboBox2 and jComboBox3). It then performs the necessary operations to add the room, such as creating a Room object and adding it to a list or database. In the provided example, the code simply prints the values for demonstration purposes.
-
-You can similarly add functionality to other components by implementing their respective action listeners and defining the desired behavior within those listeners.
-
-Note: The provided code only includes the front-end implementation. The back-end functionality, such as storing the room data or performing operations on the data, is not included. You would need to implement that separately based on your specific requirements.
-
+}
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtpriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtpriceActionPerformed
@@ -281,17 +274,17 @@ Note: The provided code only includes the front-end implementation. The back-end
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel av;
+    private javax.swing.JLabel cleanaf;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JLabel paisa;
+    private javax.swing.JLabel roomnum;
     private javax.swing.JComboBox<String> txtav;
     private javax.swing.JComboBox<String> txtbed;
     private javax.swing.JComboBox<String> txtclean;
