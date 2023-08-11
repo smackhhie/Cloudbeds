@@ -1,8 +1,6 @@
 package dao;
-
 import database.*;
 import java.sql.*;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,10 +12,15 @@ public class dao_All {
     private Connection conn = FRONT.dbConnect();
     PreparedStatement pst;
 
-    public boolean checkcheckInData(String fullName, String phoneNumber, int amountPaid, Date checkinDate, int duration, String gender, int roomNumber, String roomType, int amountRemaining, int customerId, String packageStatus) throws Exception {
+    public boolean checkcheckInData(String fullName, String phoneNumber, 
+            int amountPaid, Date checkinDate, int duration, String gender, int roomNumber, String roomType, 
+            int amountRemaining, int customerId, String packageStatus) throws Exception {
         try {
 
-            String sql = "INSERT INTO checkIn_DB (customer_name, phone_number, amount_paid, checkin_time, duration, gender, room_no, room_type, amount_due, customerNO, package) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO checkIn_DB (customer_name, "
+                    + "phone_number, amount_paid, checkin_time, duration, gender, "
+                    + "room_no, room_type, amount_due, customerNO, package) "
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             pst = conn.prepareStatement(sql);
             pst.setString(1, fullName);
             pst.setString(2, phoneNumber);

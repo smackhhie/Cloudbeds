@@ -4,22 +4,26 @@
  */
 package View;
 
-//import javax.swing.JFrame;
-//import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import java.awt.Dimension;
 import Model.roomAva_Model;
 import Controller.roomAva_Controller;
-import java.awt.event.ActionListener;
-//import javax.swing.JComboBox;
-//import javax.swing.JTextField;
 import javax.swing.JOptionPane;
+
+import static Model.roomAva_Model.p_RateisNeg;
+import static Model.roomAva_Model.p_rateISzero;
+import static Model.roomAva_Model.p_rateemp;
+import static Model.roomAva_Model.r_RateisNeg;
+import static Model.roomAva_Model.r_rateISzero;
+import static Model.roomAva_Model.r_rateemp;
+import static Model.roomAva_Model.roomAva;
+import static Model.roomAva_Model.roomStatus;
+import static Model.roomAva_Model.roomnumbervalid;
 
 public class roomAva_View extends javax.swing.JFrame {
 
     //private DefaultTableModel tableModel;
-
-    private roomAva_Controller controller;
+    private final roomAva_Controller controller;
 
     DefaultTableModel dtm = null;
 
@@ -30,6 +34,18 @@ public class roomAva_View extends javax.swing.JFrame {
 
     public DefaultTableModel getTableModel() {
         return dtm;
+    }
+
+    public String getCleanStat() {
+        return combo_Status.getSelectedItem().toString();
+    }
+
+    public String getAvaStat() {
+        return comboAvailability.getSelectedItem().toString();
+    }
+
+    public String getRoomNum() {
+        return comboRoom_No.getSelectedItem().toString();
     }
 
     public roomAva_View() {
@@ -52,10 +68,6 @@ public class roomAva_View extends javax.swing.JFrame {
         model = new roomAva_Model(availability, status, room_no, rate, package_rate);
         return model;
     }
-
-//    public void updateRoom(ActionListener log) {
-//        btn_Update.addActionListener(log);
-//    }
 
     public void showMessage(String msg) {
         {
@@ -329,8 +341,9 @@ public class roomAva_View extends javax.swing.JFrame {
 
     private void btn_ShowRoomsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ShowRoomsActionPerformed
         // TODO add your handling code here:
+        controller.PopulateRoomNumberss(comboRoom_No);      
         controller.populateTableFromDatabase();
-        controller.PopulateRoomNumberss(comboRoom_No);
+
 
     }//GEN-LAST:event_btn_ShowRoomsActionPerformed
 
@@ -388,6 +401,70 @@ public class roomAva_View extends javax.swing.JFrame {
                 new roomAva_View().setVisible(true);
             }
         });
+    }
+
+    public boolean isvalid() {
+        String packagerate = txt_prate.getText();
+        String roomrate = txt_rate.getText();
+        String roomAvai = getAvaStat();
+        String clean_Stat = getCleanStat();
+        String roomnum = getRoomNum();
+
+//        if (packagerate.isEmpty() || roomrate.isEmpty() || roomAvai.isEmpty() || clean_Stat.isEmpty() || roomnum.isEmpty()) {
+//            JOptionPane.showMessageDialog(this, "One or more fields are empty");
+//            return false;
+//        }
+            if (!p_rateemp(packagerate)) {
+        JOptionPane.showMessageDialog(this, "Please enter the package rate");
+        return false;
+    }
+            if (!r_rateemp(roomrate)) {
+        JOptionPane.showMessageDialog(this, "Please enter the room rate");
+        return false;
+    }
+            if (!roomAva(roomAvai)) {
+        JOptionPane.showMessageDialog(this, "Please select the availability status");
+        return false;
+    }
+            if (!roomStatus(clean_Stat)) {
+        JOptionPane.showMessageDialog(this, "Please select the clean status");
+        return false;
+    }
+                if (!roomnumbervalid(roomnum)) {
+        JOptionPane.showMessageDialog(this, "Please select a room number");
+        return false;
+    }       
+        int package_r;
+        try {
+            package_r = Integer.parseInt(packagerate);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Invalid package rate");
+            return false;
+        }
+        int room_r;
+        try {
+            room_r = Integer.parseInt(roomrate);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Invalid room rate");
+            return false;
+        }
+        if (!p_rateISzero(package_r)) {
+            JOptionPane.showMessageDialog(this, "package rate can't be 0");
+            return false;
+        }
+        if (!r_rateISzero(room_r)) {
+            JOptionPane.showMessageDialog(this, "room rate can't be 0");
+            return false;
+        }
+        if (!r_RateisNeg(room_r)) {
+            JOptionPane.showMessageDialog(this, "room rate can't be negative");
+            return false;
+        }
+        if (!p_RateisNeg(package_r)) {
+            JOptionPane.showMessageDialog(this, "package rate can't be negative");
+            return false;
+        }
+        return true;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

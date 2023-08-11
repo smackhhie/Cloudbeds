@@ -34,9 +34,6 @@ public class Check_in_out extends javax.swing.JFrame {
         return Integer.parseInt(roomNumberStr);
     }
 
-//    public String getstrRoomrate() {
-//        return combo_rNumber;
-//    }
 
     public String getpackageStatus() {
         return combo_pack.getSelectedItem().toString();

@@ -1,11 +1,9 @@
 package Controller;
-
 import Model.checkin_Model;
 import View.Check_in_out;
 import dao.dao_All;
 import javax.swing.JComboBox;
 import java.util.List;
-
 public class checkin_Controller {
 
     private checkin_Model mymodel;
@@ -25,7 +23,6 @@ public class checkin_Controller {
         view.getTxt_cID().setText(String.valueOf(updatedCustomerId));
 
     }
-
     public void submit() {
 
         if (view.isvalid()) {

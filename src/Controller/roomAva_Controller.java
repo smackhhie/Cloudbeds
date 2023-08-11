@@ -27,7 +27,7 @@ public class roomAva_Controller {
 
     public void update() {
 
-        {
+        if (view.isvalid()) {
             mymodel = view.getData();
             data = new dao_roomAva();
             try {
@@ -44,6 +44,7 @@ public class roomAva_Controller {
                 e.printStackTrace();
             }
         }
+        populateTableFromDatabase();
     }
 
 //Populate Table-------------------------------------------------------------------------------------------------------    
@@ -56,7 +57,7 @@ public class roomAva_Controller {
             String[] rowData = roomData.split(",");
 
             if (rowData.length >= 6) {
-                Object[] formattedRowData = {rowData[0], rowData[1], rowData[2], rowData[3], rowData[4], rowData[5]};
+                Object[] formattedRowData = {rowData[0], rowData[1], rowData[5], rowData[2], rowData[3], rowData[4]};
                 view.getTableModel().addRow(formattedRowData);
             }
         }
@@ -64,17 +65,20 @@ public class roomAva_Controller {
     }
 
 //----------------------------------------------------------------------------------------------------------------------
+public void PopulateRoomNumberss(JComboBox<String> comboRoom_No) {
+    data = new dao_roomAva();
+    List<Integer> roomNumbers = data.refreshRoomNumbers();
 
-    public void PopulateRoomNumberss(JComboBox<String> comboRoom_No) {
-
-        data = new dao_roomAva();
-        List<Integer> roomNumbers = data.refreshRoomNumbers();
-        comboRoom_No.removeAllItems();
-
+    if (comboRoom_No.getItemCount() == 0) {
         for (int roomNumber : roomNumbers) {
             comboRoom_No.addItem(String.valueOf(roomNumber));
         }
     }
+}
+
+
+
+
 
     public void refreshPackageRates(int roomNumber, JTextField txt_prate) {
         String rates = data.getPackageRates(roomNumber);

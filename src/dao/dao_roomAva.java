@@ -4,7 +4,7 @@
  */
 package dao;
 
-import database.*;
+
 import java.sql.*;
 
 import java.sql.Connection;
@@ -20,19 +20,21 @@ public class dao_roomAva {
     private Connection conn = database.FRONT.dbConnect();
     PreparedStatement pst;
     
+
 public Set<String> getRoomsData() {
     Set<String> stringSet = new LinkedHashSet<>();
 
     try (Statement stmt = conn.createStatement();
-         ResultSet rs = stmt.executeQuery("SELECT roomNo, room_type, room_availability, room_status, package_rate, room_rate FROM rooms")) {
+         ResultSet rs = stmt.executeQuery("SELECT roomNo, room_type, room_rate, room_availability, room_status, package_rate FROM rooms")) {
 
         while (rs.next()) {
             String roomNo = rs.getString("roomNo");
             String roomType = rs.getString("room_type");
-            String availability = rs.getString("room_availability");
-            String status = rs.getString("room_status");
-            String packageRate = rs.getString("package_rate");
-            String roomRate = rs.getString("room_rate");
+            String roomRate = rs.getString("room_rate"); // Corrected column
+            String availability = rs.getString("room_availability"); // Corrected column
+            String status = rs.getString("room_status"); // Corrected column
+            String packageRate = rs.getString("package_rate"); // Corrected column
+
 
             String roomData = roomNo + "," + roomType + "," + availability + "," + status + "," + packageRate + "," + roomRate;
             stringSet.add(roomData);
