@@ -20,7 +20,7 @@ public class cDetails_Controller {
 public void populateRoomNumbers(JComboBox<String> combo) {
     try {
         Class.forName("com.mysql.cj.jdbc.Driver");
-        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotel_management_system", "root", "pavilion1!");
+        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cloudbeds", "root", "pavilion1!");
         
         String query = "SELECT room_no FROM checkIn_DB";
         pst = conn.prepareStatement(query);
@@ -45,7 +45,7 @@ public void populateRoomNumbers(JComboBox<String> combo) {
         roomNumber=view.getSelectedRoomNumber();
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotel_management_system", "root", "pavilion1!");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cloudbeds", "root", "15anup#$");
 
             // to retrieve available room numbers of the selected type
             String query = "SELECT customer_name  FROM checkIn_DB WHERE room_no = '" + roomNumber+ "'";

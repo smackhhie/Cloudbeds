@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package controller;
-import model.roomAva_Model;
-import view.roomAva_View;
+package Controller;
+import Model.roomAva_Model;
+import View.roomAva_View;
 import java.sql.*;
 import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
@@ -19,17 +19,14 @@ public class roomAva_Controller {
     
     public roomAva_Controller(roomAva_View view){
         this.view=view;
-//        this.model = new roomAva_Model(view.getSelectedAvai(), view.getSelectedclean(), view.getSelectedRoomNumber(), view.getRate());
 
     }
-
-    
      public void populateTableFromDatabase() {
         
         view.getTableModel().setRowCount(0);
         
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotel_management_system", "root", "pavilion1!");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cloudbeds", "root", "pavilion1!");
             String query = "SELECT * FROM rooms";
             pst = conn.prepareStatement(query);
             ResultSet resultSet = pst.executeQuery();
@@ -42,10 +39,9 @@ public class roomAva_Controller {
                 System.out.println("vvv");
                 String roomAvailability = resultSet.getString("room_availability");
                 String roomStatus = resultSet.getString("room_status");
-                int Package_Rate = resultSet.getInt("package_rate");
 
                 // Add the data to the table model
-                Object[] rowData = { roomNo, roomType, roomRate, roomAvailability, roomStatus,Package_Rate };
+                Object[] rowData = { roomNo, roomType, roomRate, roomAvailability, roomStatus };
                 view.getTableModel().addRow(rowData);
             }
         } catch (SQLException e) {
@@ -68,7 +64,7 @@ public class roomAva_Controller {
     public void populateRoomNumbers(JComboBox<String> combo) {
     try {
         Class.forName("com.mysql.cj.jdbc.Driver");
-        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotel_management_system", "root", "pavilion1!");
+        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cloudbeds", "root", "pavilion1!");
         
         String query = "SELECT roomNo FROM rooms ";
         pst = conn.prepareStatement(query);
@@ -93,7 +89,7 @@ public void refreshRates(int roomNumber, JTextField txt_rate) {
         roomNumber=view.getSelectedRoomNumber();
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotel_management_system", "root", "pavilion1!");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cloudbeds", "root", "pavilion1!");
 
            
             String query = "SELECT room_rate  FROM rooms WHERE roomNo = '" + roomNumber+ "'";
@@ -121,44 +117,12 @@ public void refreshRates(int roomNumber, JTextField txt_rate) {
             e.printStackTrace();
         }
     }
-public void refreshPackageRates(int roomNumber, JTextField txt_prate) {
-        roomNumber=view.getSelectedRoomNumber();
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotel_management_system", "root", "pavilion1!");
-
-           
-            String query = "SELECT package_rate  FROM rooms WHERE roomNo = '" + roomNumber+ "'";
-
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
-            String rates = "";
-            
-            while (rs.next()) {
-            int pakroomRates = rs.getInt("package_rate");
-            rates += pakroomRates + ", ";                
-
-            }
-        if (rates.endsWith(", ")) {
-            rates = rates.substring(0, rates.length() - 2);
-        }
-
-        // Set the customer names in the text field
-        txt_prate.setText(rates);
-            
-            rs.close();
-            stmt.close();
-            conn.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
 public void updateStatus(int roomNumber, JComboBox<String> combo_Status) {
     roomNumber = view.getSelectedRoomNumber();
     try {
         Class.forName("com.mysql.cj.jdbc.Driver");
-        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotel_management_system", "root", "pavilion1!");
+        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cloudbeds", "root", "pavilion1!");
 
         
         String query = "SELECT room_status FROM rooms WHERE roomNo = " + roomNumber;
@@ -192,7 +156,7 @@ public void updateAvailabilityStatus(int roomNumber, JComboBox<String> comboAvai
     roomNumber = view.getSelectedRoomNumber();
     try {
         Class.forName("com.mysql.cj.jdbc.Driver");
-        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotel_management_system", "root", "pavilion1!");
+        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cloudbeds", "root", "pavilion1!");
 
         
         String query = "SELECT room_availability FROM rooms WHERE roomNo = " + roomNumber;
@@ -225,7 +189,7 @@ public void updateAvailabilityStatus(int roomNumber, JComboBox<String> comboAvai
 public void updateRoomDetails(roomAva_Model model) {
     try {
         Class.forName("com.mysql.cj.jdbc.Driver");
-        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotel_management_system", "root", "pavilion1!");
+        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cloudbeds", "root", "pavilion1!");
 
         // Update the room details in the database
         String query = "UPDATE rooms SET room_status = ?, room_rate = ?, room_availability = ? WHERE roomNo = ?";
@@ -246,7 +210,7 @@ public void updateRoomDetails(roomAva_Model model) {
 //       roomNumber=view.getSelectedRoomNumber();
 //        try {
 //            Class.forName("com.mysql.cj.jdbc.Driver");
-//            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotel_management_system", "root", "pavilion1!");
+//            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cloudbeds", "root", "pavilion1!");
 //
 //            // to retrieve available room numbers of the selected type
 //            String query = "SELECT room_status FROM rooms WHERE room_type = '" + roomNumber+ "'";
