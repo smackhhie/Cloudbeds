@@ -19,7 +19,6 @@ class Report_Detail(models.Model):
     reference_value =models.CharField( max_length=50)
     unit =models.CharField( max_length=50)
     report = models.ForeignKey(Report, blank=True, null=True, on_delete=models.CASCADE)
-<<<<<<< HEAD
 
 class TechAdd(models.Model):
     first_name =models.CharField( max_length=50)
@@ -32,9 +31,5 @@ class TechAdd(models.Model):
     gender =models.DateField( max_length=50)
     
     
-
-    
-=======
->>>>>>> origin/ayushbhetwal
     
     

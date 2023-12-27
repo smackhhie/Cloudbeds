@@ -3,13 +3,9 @@
 # views.py
 from django.shortcuts import render,HttpResponse
 from myapp.models import Report,Report_Detail
-from .forms import Report_DetailForm  # Import the Report_DetailForm
+from .forms import Report_DetailForm  
 import json
-<<<<<<< HEAD
-from django.http import JsonResponse
-=======
 from django.http import HttpResponseRedirect, JsonResponse
->>>>>>> origin/ayushbhetwal
 from django.shortcuts import get_object_or_404
 
 def index(request):
@@ -45,13 +41,8 @@ def about(request):
 def contact(request):
     return HttpResponse("This is Contact Page")
 
-<<<<<<< HEAD
 def adminpage(request):
     return render(request,'adminpage.html')
-=======
-def adminprofile(request):
-    return render(request,'adminprofile.html')
->>>>>>> origin/ayushbhetwal
       
 def createreport(request):
     
@@ -130,10 +121,7 @@ def createreport(request):
             consultant=consultant
         )
         new_report.save()
-<<<<<<< HEAD
         print(request.POST)
-=======
->>>>>>> origin/ayushbhetwal
       
         test_dropdown = request.POST.get('test_list')
         if test_dropdown:
@@ -141,7 +129,6 @@ def createreport(request):
             if test_dropdown in options:
                 subtests = options[test_dropdown]
                 for subtest in subtests:
-<<<<<<< HEAD
                     
                     text = subtest['text']
                     result_data = json.loads(request.POST.get('resultData'))
@@ -156,20 +143,6 @@ def createreport(request):
                         results=result_data,
                         reference_value=subtest['reference'],
                         unit=subtest['unit']
-=======
-                    text = subtest['text']
-                    # result = request.POST.get(f'{text}_result')
-                    result ="ok"
-                    reference = subtest['reference']
-                    unit = subtest['unit']
-
-                    new_report_detail = Report_Detail(
-                        test_list=test_dropdown,
-                        investigation=text,
-                        results=result,
-                        reference_value=reference,
-                        unit=unit
->>>>>>> origin/ayushbhetwal
                     )
                     new_report_detail.save()
 
@@ -191,81 +164,9 @@ def viewreport(request):
 def packages(request):
     return render(request,'packages.html')
 
-<<<<<<< HEAD
 def techlogin(techlogin):
     return render(request,"techlogin.html")
 
-=======
-def adminlogin(request):
-    return render(request,"adminlogin.html")
-
-
-# =====================================================================================
-
-from django.contrib.auth.forms import AuthenticationForm,PasswordChangeForm,SetPasswordForm,UserChangeForm
-from django.contrib.auth import authenticate,login,logout,update_session_auth_hash
-from django.contrib  import  messages
-from .forms import EditadminprofileForm, EditsuperadminprofileForm
-# login function for admin
-def admin_login(request):
-  if not request.user.is_authenticated:
-    if request.method =="POST":
-        fm = AuthenticationForm(request=request,data=request.POST)
-        if fm.is_valid():
-          uname = fm.cleaned_data['username']
-          upass = fm.cleaned_data['password']
-          user = authenticate(username=uname,password=upass)
-          if user is not None:
-              login(request,user)
-              messages.success(request,'LOGED IN SUCCESSFULLY🤯🤯🤯')
-              return HttpResponseRedirect('/adminprofile/')
-    else:
-      fm=AuthenticationForm()
-    return render(request,'adminlogin.html',{'form':fm})
-  else:
-      return HttpResponseRedirect('/adminprofile/')
-  
-
-def admin_profile(request):
-    if  request.user.is_authenticated:
-      if request.method == "POST":
-         fm= EditadminprofileForm(request.POST, instance= request.user)
-         if fm.is_valid():
-          messages.info(request,'Profile Updated Successfully!')
-          fm.save()
-      else:
-        # if request.user.is_superuser == True:
-        #   fm =EditsuperadminprofileForm(instance = request.user)
-        # else:
-          fm =EditadminprofileForm(instance=request.user)
-      return render(request,'adminprofile.html',{'name': request.user,'form':fm})
-    else:
-        return HttpResponseRedirect('adminlogin')
-
-
-
-def admin_logout(request):
-    logout(request)
-    return HttpResponseRedirect("/adminlogin/")
-
-def admin_password(request):
-  if request.user.is_authenticated:  
-    if request.method == "POST":
-      fm = PasswordChangeForm(user=request.user,data = request.POST)
-      if fm.is_valid():
-          fm.save()
-          # update_session_auth_hash(request,fm.user) =============> if uncommented, the admin will not be forcefully loged out .he will be movw to admin profile.
-          messages.info(request,"PASSWORD HAS BEEN UPDATED!")
-          return HttpResponseRedirect('/adminprofile/')
-    else :
-      fm = PasswordChangeForm(user=request.user)
-    return render(request,'adminpassword.html',{'form': fm})
-  else:
-     return HttpResponseRedirect('/adminlogin/')
-  
-
-  # =========================================================================================
->>>>>>> origin/ayushbhetwal
 def updatereport(request,contact):
     if request.method == 'POST':
         # Retrieve the existing record from the database
@@ -284,7 +185,6 @@ def updatereport(request,contact):
         new_age = request.POST.get('age')
         if new_age.strip() == '' or not new_age.isnumeric():
             return render(request, 'updateReport.html', {'report': existing_report})
-
         # Save the updated record
         existing_report.save()
         
@@ -309,7 +209,6 @@ def updatereport(request,contact):
     else:
         # Retrieve the existing Report record for rendering in the form
         existing_report = get_object_or_404(Report, contact=contact)
-<<<<<<< HEAD
         return render(request, 'updateReport.html', {'report': existing_report})
         
         
@@ -335,6 +234,3 @@ def TechAdd(request):
             gender=gender
         )
         new_techadd.save()
-=======
-        return render(request, 'updateReport.html', {'report': existing_report})
->>>>>>> origin/ayushbhetwal

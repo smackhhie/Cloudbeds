@@ -2,7 +2,7 @@
   /* margin-left: 0px;
   margin-right: 0px; */
   display: flex;
-<<<<<<< HEAD
+
  }
  .header {
    background-color: #6290E8;
@@ -103,7 +103,7 @@ box-shadow: 6px 6px 10px #555;
  border: none;
 
  
-=======
+
 }
 .header {
   background-color: #6290e8;
@@ -201,12 +201,12 @@ form {
   padding: 80px;
   margin-left: -20px;
   border: none;
->>>>>>> origin/ayushbhetwal
+
 }
 /* -------------------------------------- */
 
 table {
-<<<<<<< HEAD
+
  width: 100%;
  border-collapse: collapse;
  margin-top: 10px;
@@ -214,7 +214,7 @@ table {
  overflow-y: auto;
             display: block;
             max-height: 500px;
-=======
+
   width: 100%;
   border-collapse: collapse;
   margin-top: 10px;
@@ -222,7 +222,7 @@ table {
   overflow-y: auto;
   display: block;
   max-height: 500px;
->>>>>>> origin/ayushbhetwal
+
 }
 
 th,
@@ -253,7 +253,7 @@ td {
   margin-top: 30px;
 }
 
-<<<<<<< HEAD
+
 .button-create{
  justify-content: center;
  background-color: #00ffa1 !important;
@@ -269,7 +269,7 @@ td {
 
 
  .dropdown-container {
-=======
+
 .button-create {
   justify-content: center;
   background-color: #00ffa1 !important;
@@ -283,12 +283,11 @@ td {
 }
 
 .dropdown-container {
->>>>>>> origin/ayushbhetwal
+
   margin-bottom: 20px;
 }
 
 #testDropdown {
-<<<<<<< HEAD
   padding: 5px; 
 }
 
@@ -310,7 +309,7 @@ td {
   border-radius: 25px;
   box-shadow: 6px 6px 10px #555;
   }
-=======
+
   padding: 5px;
 }
 
@@ -328,4 +327,3 @@ td {
   border-radius: 25px;
   box-shadow: 6px 6px 10px #555;
 }
->>>>>>> origin/ayushbhetwal
