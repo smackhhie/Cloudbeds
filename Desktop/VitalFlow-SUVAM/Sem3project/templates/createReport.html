@@ -90,12 +90,7 @@
             <div class="label" style="font-weight: bold;">CONSULTANT:</div>
             <input type="text" class="input" name="consultant" placeholder="Enter consultant">
             
-<<<<<<< HEAD
             
-=======
-            {% comment %} <form class="form" id="reportForm" action="{% url 'createreport' %}" method="post">
-              {% csrf_token %} {% endcomment %}
->>>>>>> origin/ayushbhetwal
               <div class="dropdown-container">
                 <label for="testDropdown" name ="test_list">Select Test:</label>
                 <select id="testDropdown"  name="test_list">
@@ -183,7 +178,6 @@
         ],
         "Uric Acid": [
           { "text": 'Male', "reference": '3.4 - 7.0', "unit": 'mg/dL' },
-<<<<<<< HEAD
           { "text": 'Female', "reference": '2.4 - 6.0', "unit": 'mg/dL' } 
         ]};
         
@@ -238,11 +232,6 @@
           ]
         }; {% endcomment %}
         
-=======
-          { "text": 'Female', "reference": '2.4 - 6.0', "unit": 'mg/dL' }
-        ]};
-
->>>>>>> origin/ayushbhetwal
         document.addEventListener('DOMContentLoaded', function () {
           var dropdown = document.getElementById("testDropdown");
           dropdown.addEventListener('change', addRow);
@@ -267,7 +256,6 @@
               var cellResult = row.insertCell();
               var inputResult = document.createElement("input");
               inputResult.setAttribute("type", "text");
-<<<<<<< HEAD
               inputResult.setAttribute("name", `result_${selectedTest}_${subtest.text.replace(/\s+/g, '_')}`);
               inputResult.setAttribute("placeholder", "Enter Result");
               cellResult.appendChild(inputResult);
@@ -275,21 +263,11 @@
              //cellResult.innerHTML = subtests.map((subtest, index) => `<input type="text" class="textbox-input" name="${subtest.text}" style="height: 20px; margin-top: ${index === 0 ? '30px' : '0'};" placeholder="ENTER RESULT">`).join('<br>');
               
              var cellReference = row.insertCell();
-=======
-              inputResult.setAttribute("name", `${subtest.text}_result`);
-              inputResult.setAttribute("id", `${subtest.text}_result`);
-              inputResult.value = "RESULT";  
-
-              cellResult.appendChild(inputResult);
-      
-              var cellReference = row.insertCell();
->>>>>>> origin/ayushbhetwal
               cellReference.textContent = subtest.reference;
       
               var cellUnit = row.insertCell();
               cellUnit.textContent = subtest.unit;
             });
-<<<<<<< HEAD
           }    
 }
 document.getElementById('reportForm').addEventListener('submit', function (event) {
@@ -334,12 +312,6 @@ document.getElementById('reportForm').addEventListener('submit', function (event
     console.error('Error:', error);
   });
 });
-=======
-          }
-        
-      
-}
->>>>>>> origin/ayushbhetwal
 function clearForm() {
   document.getElementById("reportForm").reset();
 }

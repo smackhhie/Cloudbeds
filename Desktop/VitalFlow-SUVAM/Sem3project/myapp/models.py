@@ -20,6 +20,7 @@ class Report_Detail(models.Model):
     unit =models.CharField( max_length=50)
     report = models.ForeignKey(Report, blank=True, null=True, on_delete=models.CASCADE)
 
+
 class TechAdd(models.Model):
     first_name =models.CharField( max_length=50)
     middle_name=models.CharField( max_length=50,null=True)
